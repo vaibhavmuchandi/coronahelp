@@ -37,4 +37,9 @@ module.exports = (app, passport) => {
       }
     })
   })
+
+  app.get('/thankyou', (req, res) => {
+    res.render('thank-you')
+})
 }
+

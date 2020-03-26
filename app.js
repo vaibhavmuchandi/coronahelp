@@ -1,7 +1,6 @@
 var express = require('express');
 var port = process.env.PORT || 3000;
 var mongoose = require('mongoose');
-var passport = require('passport');
 var flash = require('connect-flash');
 var bodyParser = require('body-parser');
 var session = require('express-session');
@@ -15,7 +14,6 @@ mongoose.connect(uri, {
 });
 
 var app = express();
-require('./config/passport')(passport);
 
 
 app.use(require("express-session")({
@@ -23,8 +21,6 @@ app.use(require("express-session")({
   resave: false,
   saveUninitialized: false
 }));
-app.use(passport.initialize());
-app.use(passport.session());
 app.use(flash());
 
 app.set("view engine", "ejs");
@@ -33,6 +29,6 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-require('./app/routes')(app, passport);
+require('./app/routes')(app);
 
 app.listen(3000, () => console.log(`Server started at ${port}`));
