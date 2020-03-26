@@ -1,5 +1,5 @@
 module.exports = (app, passport) => {
-    var AddressAutocomplete = require('google-address-autocomplete');
+    var store = require('../app/models/stores')
     app.get('/', (req, res) => {
         res.render('index')
     })
@@ -10,6 +10,10 @@ module.exports = (app, passport) => {
 
     app.get('/add-store', (req, res) => {
         res.render('add-store')
+    })
+    app.post('/add-store', (req, res) => {
+        storeLocality = req.body.resultid;
+        res.send(storeLocality)
     })
 
     app.get('/test', (req, res) => {

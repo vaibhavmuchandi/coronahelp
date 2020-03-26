@@ -25,40 +25,90 @@
               <div class="card card-signin my-4">
                 <div class="card-body">
                     <h5 class="card-title text-center">Enter your store details</h5>
-                    <form class="form-signin" action="/login" method="POST">
+                    <form action="/add-store" method="POST" class="form-signin">
                         <div class="form-label-group">
-                          <input type="text" id="autocomplete" class="form-control" placeholder="Location" name="autocomplete" required autofocus>
-                          <label for="autocomplete">Location</label>
+                          <input type="text" id="autocomplete" class="form-control" placeholder="Locality" name="autocomplete" required autofocus>
+                          <label for="autocomplete">Locality</label>
                         </div>
                         <input type="text" id="resultid" name="resultid" hidden>
                         <div class="form-label-group">
                             <input type="text" id="storeName" class="form-control" placeholder="storeName" name="storeName" required autofocus>
-                            <label for="autocomplete">Location</label>
+                            <label for="storeName">Store Name</label>
+                        </div>
+                        <div class="form-label-group">
+                            <input type="number" id="storeContact" class="form-control" placeholder="storeContact" name="storeContact" required autofocus>
+                            <label for="storeContact">Store Contact</label>
+                        </div>
+                        <div class="form-label-group">
+                            <input type="text" id="storeAddress" class="form-control" placeholder="storeAddress" name="storeAddress" required autofocus>
+                            <label for="storeAddress">Store Full Address</label>
+                        </div>
+                        <div class="form-label-group">
+                            <input type="text" id="storeLandmark" class="form-control" placeholder="storeLandmark" name="storeLandmark" autofocus>
+                            <label for="storeLandmark">Landmark</label>
                         </div>
 
+                        <div id="itemSelling">
+                        <div class="items" style="display: inline; margin-right: 7%;">
+                        <label for="itemSelling">Items available:</label>
+                        </div>
+                        <div class="items" style="display: inline; margin-right: 7%;">
+                            <input type="checkbox" class="form-check-input" id="itemGrocery" onclick='buildList("Groceries")'> Groceries
+                        </div>
+                        <div class="items" style="display: inline; margin-right: 7%;">
+                            <input type="checkbox" class="form-check-input" id="itemVegetables" onclick='buildList("Vegetables")'> Vegetables
+                        </div>
+                        <br>
+                        <div class="items" style="display: inline; margin-right: 7%;">
+                            <input type="checkbox" class="form-check-input" id="itemGrains" onclick='buildList("Grains and Pulses")'> Grains and Pulses
+                        </div>
+                        <br>
+                        <div class="items" style="display: inline; margin-right: 7%;">
+                            <input type="checkbox" class="form-check-input" id="itemMedicines" onclick='buildList("Medicines")'> Medicines
+                        </div>
+                        <div class="items" style="display: inline; margin-right: 7%;">
+                            <input type="checkbox" class="form-check-input" id="itemWater" onclick='buildList("Water Supplies")'> Water Supplies
+                        </div>
+                        <div class="items" style="display: inline; margin-right: 7%;">
+                            <input type="checkbox" class="form-check-input" id="itemPet" onclick='buildList("Pet Supplies")'> Pet Supplies
+                        </div>
+                        </div>
+                        <input type="text" id="items" hidden>
+                        <button class="btn btn-lg btn-primary btn-block text-uppercase" style="margin-top: 20px;">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+</body>
 
 
-
-
-
-                        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMtQOCpkOkgSeVgBwwtPrUh5A9QW32iqc&libraries=places"></script>
-                        <script src="assets/js/google-address-autocomplete.min.js"></script>
-                        <script src="assets/js/jquery.min.js"></script>
-                        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-                        <script>
-                            var placeid = ""
-                            function set(){
-                                    document.getElementById('resultid').value = placeid;
-                                }
-                                const options = {
-                                    componentRestrictions: {country: "in"}
-                                };
-                                new AddressAutocomplete('#autocomplete', options, function (result, rawResponse) {
-                                    console.log(result);
-                                    //console.log(rawResponse.place_id);
-                                    placeid = rawResponse.place_id
-                                    set() 
-                                });
-                        
-                                </script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMtQOCpkOkgSeVgBwwtPrUh5A9QW32iqc&libraries=places"></script>
+<script src="assets/js/google-address-autocomplete.min.js"></script>
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+<script>
+    var placeid = ""
+    var items = []
+    function set(){
+        document.getElementById('resultid').value = placeid;
+    }
+    const options = {
+        componentRestrictions: {country: "in"}
+    };
+    new AddressAutocomplete('#autocomplete', options, function (result, rawResponse) {
+    console.log(result);
+    //console.log(rawResponse.place_id);
+    placeid = rawResponse.place_id
+    set() 
+    });
+    function buildList(item){
+        items.push(item)
+        console.log(items)
+        document.getElementById('items').value = items
+        }
+</script>
+</html>
+                            
                     

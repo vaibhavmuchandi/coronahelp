@@ -3,6 +3,14 @@
     padding-top: 20px;
 }
 
+#add-store-btn{
+    padding-top: 20px;
+}
+
+checkbox{
+    padding-left: 5%;
+}
+
 :root {
     --input-padding-x: 1.5rem;
     --input-padding-y: .75rem;
