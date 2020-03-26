@@ -4,14 +4,38 @@ module.exports = (app, passport) => {
   app.get('/', (req, res) => {
     res.render('index')
   })
-  app.post('/', (req, res) => {
-    placeid = req.body.resultid
-    res.send(placeid)
+
+  app.get('/list-stores', (req, res) => {
+    res.render('list', {
+      stores: [],
+      message: 'Enter a location'
+    })
+  })
+  app.post('/list-stores', (req, res) => {
+    let placeid = req.body.resultid;
+    Store.find({
+        storeLocation: placeid
+      })
+      .exec((err, stores) => {
+        if (stores.length != 0) {
+          res.render('list', {
+            stores: stores,
+            message: null
+          })
+        } else {
+          res.render('list', {
+            stores: [],
+            message: 'Sorry! There seem to be no stores from this area on our site.'
+          })
+        }
+
+      })
   })
 
   app.get('/add-store', (req, res) => {
     res.render('add-store')
   })
+
   app.post('/add-store', (req, res) => {
     storeName = req.body.storeName;
     storeLocality = req.body.resultid;
@@ -32,14 +56,11 @@ module.exports = (app, passport) => {
         console.log(err);
         res.send(err);
       } else {
-        res.send("Thank you")
+        res.render('thank-you')
         console.log(createdStore)
       }
     })
   })
 
-  app.get('/thankyou', (req, res) => {
-    res.render('thank-you')
-})
 }
 
