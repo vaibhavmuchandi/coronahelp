@@ -15,7 +15,7 @@ mongoose.connect(uri, {
 });
 
 var app = express();
-require('./config/passport')(passport);
+//require('./config/passport')(passport);
 
 
 app.use(require("express-session")({
