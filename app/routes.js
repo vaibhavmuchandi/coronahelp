@@ -1,5 +1,5 @@
 module.exports = (app, passport) => {
-    var store = require('../app/models/stores')
+    var Store = require('../app/models/stores');
     app.get('/', (req, res) => {
         res.render('index')
     })
@@ -12,12 +12,30 @@ module.exports = (app, passport) => {
         res.render('add-store')
     })
     app.post('/add-store', (req, res) => {
+        storeName = req.body.storeName;
         storeLocality = req.body.resultid;
-        res.send(storeLocality)
+        storeContact = req.body.storeContact;
+        storeAddress = req.body.storeAddress;
+        storeLandmark = req.body.storeLandmark;
+        itemsAvailable = req.body.items;
+        var newStore = {
+            storeLocation: storeLocality,
+            storeName: storeName,
+            storeContact: storeContact,
+            storeFullAddress: storeAddress,
+            storeLandmark: storeLandmark,
+            storeItems: itemsAvailable
+        }
+        Store.create(newStore, function(err, createdStore){
+            if(err){
+                console.log(err);
+                res.send(err);
+            } else {
+                res.send("Thank you")
+                console.log(createdStore)
+            }
+        })
     })
 
-    app.get('/test', (req, res) => {
-        res.render('test')
-    })
 
 }
