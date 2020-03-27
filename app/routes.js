@@ -1,6 +1,6 @@
 module.exports = (app, passport) => {
-
-  var Store = require('../app/models/stores');
+  let request = require('request');
+  let Store = require('../app/models/stores');
   app.get('/', (req, res) => {
     res.render('index')
   })
@@ -33,7 +33,11 @@ module.exports = (app, passport) => {
   })
 
   app.get('/add-store', (req, res) => {
-    res.render('add-store')
+    res.render('add-store', {
+      valid: false,
+      details: {},
+      alert: 1
+    })
   })
 
   app.post('/add-store', (req, res) => {
@@ -62,5 +66,56 @@ module.exports = (app, passport) => {
     })
   })
 
-}
+  app.post('/add-store/send-otp', (req, res, next) => {
+    let phoneNumber = req.body.phoneNumber;
+    let details = JSON.parse(req.body.details);
+    app.set('details', details);
+    console.log(phoneNumber, details);
+    var options = {
+      method: 'GET',
+      url: 'http://2factor.in/API/V1/e84b3273-63bb-11ea-9fa5-0200cd936042/SMS/' + phoneNumber + '/AUTOGEN',
+      headers: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      form: {}
+    };
 
+    request(options, function(error, response, body) {
+      if (error) throw new Error(error);
+      let det = JSON.parse(body)
+      app.set('sessionNum', det.Details);
+      console.log(det.Details);
+    });
+  })
+
+  app.post('/add-store/verify-otp', (req, res) => {
+    let sessNum = app.get('sessionNum');
+    let details = app.get('details');
+    var verificationCode = req.body.otp;
+    var options = {
+      method: 'GET',
+      url: 'http://2factor.in/API/V1/e84b3273-63bb-11ea-9fa5-0200cd936042/SMS/VERIFY/' + sessNum + '/' + verificationCode,
+      headers: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      form: {}
+    };
+
+    request(options, function(error, response, body) {
+      if (error) throw new Error(error);
+      if (response.statusCode == 200) {
+        res.render('add-store', {
+          valid: true,
+          details: details,
+          alert: null
+        });
+      } else {
+        res.render('add-store', {
+          valid: false,
+          details: {},
+          alert: 'Invalid OTP'
+        });
+      }
+    });
+  })
+}
