@@ -8,7 +8,7 @@ module.exports = (app, passport) => {
   app.get('/list-stores', (req, res) => {
     res.render('list', {
       stores: [],
-      message: 'Enter a location'
+      message: 'Enter a location to search for stores'
     })
   })
   app.post('/list-stores', (req, res) => {
