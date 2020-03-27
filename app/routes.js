@@ -13,8 +13,16 @@ module.exports = (app, passport) => {
   })
   app.post('/list-stores', (req, res) => {
     let placeid = req.body.resultid;
+    let area = req.body.autocomplete;
     Store.find({
-        storeLocation: placeid
+        $or: [{
+          storeLocation: placeid
+        }, {
+          storeArea: {
+            $regex: area,
+            $options: 'i'
+          }
+        }]
       })
       .exec((err, stores) => {
         if (stores.length != 0) {
@@ -34,7 +42,7 @@ module.exports = (app, passport) => {
 
   app.get('/add-store', (req, res) => {
     res.render('add-store', {
-      valid: false,
+      valid: null,
       details: {},
       alert: 1
     })
@@ -114,7 +122,7 @@ module.exports = (app, passport) => {
         res.render('add-store', {
           valid: false,
           details: {},
-          alert: 'Invalid OTP'
+          alert: 'Incorrect OTP'
         });
       }
     });
