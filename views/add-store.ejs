@@ -70,7 +70,7 @@
             </div> <br>
             <div class="items" style="display: inline; margin-right: 7%;">
               <input type="checkbox" class="form-check-input" id="itemGrains" onclick='buildList("Grains and Pulses")'> Grains and Pulses
-            </div> 
+            </div>
             <div class="items" style="display: inline; margin-right: 7%;">
               <input type="checkbox" class="form-check-input" id="itemToiletries" onclick='buildList("Toiletries")'> Toiletries
             </div>
@@ -85,26 +85,26 @@
               <input type="checkbox" class="form-check-input" id="itemPet" onclick='buildList("Pet Supplies")'> Pet Supplies
             </div>
           </div>
-            <div class="items" style="display: inline; margin-right: 7%;">
-              <br>
-              Are you willing to provide home delivery?
-              <div style=""><input type="radio" name="radio" class="form-check-input" id="delivery" value="Yes"> Yes </div>
-              <div><input type="radio" name="radio" class="form-check-input" id="delivery" value="No"> No </div>
-            </div>
+          <div class="items" style="display: inline; margin-right: 7%;">
+            <br>
+            Are you willing to provide home delivery?
+            <div style=""><input type="radio" name="radio" class="form-check-input" id="delivery" value="Yes"> Yes </div>
+            <div><input type="radio" name="radio" class="form-check-input" id="delivery" value="No"> No </div>
           </div>
-          <input type="text" id="items" name="items" hidden>
-          <% if(valid) { %>
-          <button class="btn btn-lg btn-primary btn-block text-uppercase" style="margin-top: 20px;">Submit</button>
-          <br>
-          <% } else {%>
-          <%if(alert==1) {%>
-          <p style="color: red;">Please verify your mobile number by OTP</p>
-          <%}%>
+        </div>
+        <input type="text" id="items" name="items" hidden>
+        <% if(valid) { %>
+        <button class="btn btn-lg btn-primary btn-block text-uppercase" style="margin-top: 20px;">Submit</button>
+        <br>
+        <% } else {%>
+        <%if(alert==1) {%>
+        <p style="color: red;">Please verify your mobile number by OTP</p>
+        <%}%>
           <button class="btn btn-lg btn-primary btn-block text-uppercase" style="margin-top: 20px;" disabled>Submit</button>
           <%}%>
-          </form>
-        </div>
+        </form>
       </div>
+    </div>
     </div>
     </div>
   </header>
@@ -115,13 +115,13 @@
       <div class="row">
         <div class="col-lg-6 my-auto h-100 text-center text-lg-left">
           <ul class="list-inline mb-2">
-            <li class="list-inline-item"><a href="#">About</a></li>
+            <li class="list-inline-item"><a href="/">Home</a></li>
+            <li class="list-inline-item"><span>⋅</span></li>
+            <li class="list-inline-item"><a href="/add-store">Add your store</a></li>
+            <li class="list-inline-item"><span>⋅</span></li>
+            <li class="list-inline-item"><a href="/list-stores">Search stores</a></li>
             <li class="list-inline-item"><span>⋅</span></li>
             <li class="list-inline-item"><a href="https://wa.me/918105937586">Contact</a></li>
-            <li class="list-inline-item"><span>⋅</span></li>
-            <li class="list-inline-item"><a href="#">Terms of &nbsp;Use</a></li>
-            <li class="list-inline-item"><span>⋅</span></li>
-            <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
           </ul>
           <p class="text-muted small mb-4 mb-lg-0">© CoronaFight 2020. All Rights Reserved.</p>
         </div>
@@ -157,7 +157,6 @@
           <form action="/verify-otp" method="post" class="form-signin">
             <div class="form-row">
               <div class="form-label-group col-md-8">
-                <label for="otp">OTP</label>
                 <input type="text" id="otp" class="form-control" placeholder="Enter 6-digit OTP" name="otp" required autofocus>
               </div>
               <div class="col-md-4">
