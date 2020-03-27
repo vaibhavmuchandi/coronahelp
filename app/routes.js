@@ -8,7 +8,7 @@ module.exports = (app, passport) => {
   app.get('/list-stores', (req, res) => {
     res.render('list', {
       stores: [],
-      message: 'Enter a location'
+      message: 'Enter a location to search for stores'
     })
   })
   app.post('/list-stores', (req, res) => {
@@ -82,7 +82,7 @@ module.exports = (app, passport) => {
     app.set('details', details);
     var options = {
       method: 'GET',
-      url: 'http://2factor.in/API/V1/e84b3273-63bb-11ea-9fa5-0200cd936042/SMS/' + phoneNumber + '/AUTOGEN',
+      url: 'http://2factor.in/API/V1/2ab4e5d4-685c-11ea-9fa5-0200cd936042/SMS/' + phoneNumber + '/AUTOGEN',
       headers: {
         'content-type': 'application/x-www-form-urlencoded'
       },
@@ -103,7 +103,7 @@ module.exports = (app, passport) => {
     var verificationCode = req.body.otp;
     var options = {
       method: 'GET',
-      url: 'http://2factor.in/API/V1/e84b3273-63bb-11ea-9fa5-0200cd936042/SMS/VERIFY/' + sessNum + '/' + verificationCode,
+      url: 'http://2factor.in/API/V1/2ab4e5d4-685c-11ea-9fa5-0200cd936042/SMS/VERIFY/' + sessNum + '/' + verificationCode,
       headers: {
         'content-type': 'application/x-www-form-urlencoded'
       },

@@ -1,30 +1,35 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Home - Brand</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/styles.css">
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic">
-    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
-  </head>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <title>Stores</title>
+  <link rel="stylesheet" href="assets/bootstrap/css/styles.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic">
+  <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+</head>
 
-  <body>
-    <nav class="navbar navbar-light navbar-expand bg-light navigation-clean">
-      <div class="container"><a class="navbar-brand" href="/">CoronaFight</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"></button>
-        <a class="btn btn-primary" role="button" href="/add-store">Add your store!</a>
-      </div>
-
-    </nav>
-  <header class="masthead text-black text-center" style="background:url('assets/img/bg-masthead.jpg')no-repeat center center;background-size:cover;">
-    <form action="/list-stores" method="POST" style="margin-top:20px;">
+<body>
+  <nav class="navbar navbar-light navbar-expand bg-light navigation-clean">
+    <div class="container"><a class="navbar-brand" href="/">CoronaHelp</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1">
+      </button>
+      <a class="btn btn-primary ml-auto" role="button" href="/add-store">Add your store!</a>
+    </div>
+  </nav>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+    <path fill="#f3f4f5" fill-opacity="1"
+      d="M0,192L40,176C80,160,160,128,240,106.7C320,85,400,75,480,90.7C560,107,640,149,720,144C800,139,880,85,960,74.7C1040,64,1120,96,1200,117.3C1280,139,1360,149,1400,154.7L1440,160L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z">
+    </path>
+  </svg>
+  <header id="list-page" class="masthead text-black text-center">
+    <form action="/list-stores" method="POST">
       <div class=" form-row">
         <div class="col-1 col-md-3"> </div>
         <div class="col-10 col-md-5 mb-1 mb-md-0">
-          <input class="form-control form-control-lg" type="text" id="autocomplete" size="50" placeholder="Enter your location" />
+          <input class="form-control form-control-lg" type="text" id="autocomplete" name="autocomplete" size="50" placeholder="Enter your location" />
         </div>
         <div class="col-4 col-md-1"></div>
         <input type="text" id="resultid" name="resultid" hidden>
@@ -76,7 +81,6 @@
           </div>
           <br>
           <% } %>
-
         </section>
         <%}%>
       </div>
@@ -84,33 +88,33 @@
 
 
     <section class="showcase"></section>
-  <footer class="footer bg-light">
-  <p class="text-muted small mb-4 mb-lg-0" style="text-align: center;">Made with ♥ by Vaibhav Muchandi and Varun Shiri</p>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6 my-auto h-100 text-center text-lg-left">
-          <ul class="list-inline mb-2">
-            <li class="list-inline-item"><a href="#">About</a></li>
-            <li class="list-inline-item"><span>⋅</span></li>
-            <li class="list-inline-item"><a href="https://wa.me/918105937586">Contact</a></li>
-            <li class="list-inline-item"><span>⋅</span></li>
-            <li class="list-inline-item"><a href="#">Terms of &nbsp;Use</a></li>
-            <li class="list-inline-item"><span>⋅</span></li>
-            <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
-          </ul>
-          <p class="text-muted small mb-4 mb-lg-0">© CoronaFight 2020. All Rights Reserved.</p>
-        </div>
-        <div class="col-lg-6 my-auto h-100 text-center text-lg-right">
-          <ul class="list-inline mb-0">
-            <li class="list-inline-item"><a href="www.facebook.com/vaibhavmuchandii"><i class="fa fa-facebook fa-2x fa-fw"></i></a></li>
-            <li class="list-inline-item"><a href="www.twitter.com/vaibhavmuchandi"><i class="fa fa-twitter fa-2x fa-fw"></i></a></li>
-            <li class="list-inline-item"><a href="www.instagram.com/vaibhav.muchandi"><i class="fa fa-instagram fa-2x fa-fw"></i></a></li>
-            <li class="list-inline-item"><a href="https://wa.me/918105937586"><i class="fa fa-whatsapp fa-2x fa-fw"></i></a></li>
-          </ul>
+    <footer class="footer bg-light" style="margin-top: 70px;">
+      <p class="text-muted small mb-4 mb-lg-0" style="text-align: center;">Made with ♥ by Vaibhav Muchandi and Varun Shiri</p>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 my-auto h-100 text-center text-lg-left">
+            <ul class="list-inline mb-2">
+              <li class="list-inline-item"><a href="/">Home</a></li>
+              <li class="list-inline-item"><span>⋅</span></li>
+              <li class="list-inline-item"><a href="/add-store">Add your store</a></li>
+              <li class="list-inline-item"><span>⋅</span></li>
+              <li class="list-inline-item"><a href="/list-stores">Search stores</a></li>
+              <li class="list-inline-item"><span>⋅</span></li>
+              <li class="list-inline-item"><a href="https://wa.me/918105937586">Contact</a></li>
+            </ul>
+            <p class="text-muted small mb-4 mb-lg-0">© CoronaFight 2020. All Rights Reserved.</p>
+          </div>
+          <div class="col-lg-6 my-auto h-100 text-center text-lg-right">
+            <ul class="list-inline mb-0">
+              <li class="list-inline-item"><a href="www.facebook.com/vaibhavmuchandii"><i class="fab fa-facebook fa-2x fa-fw"></i></a></li>
+              <li class="list-inline-item"><a href="www.twitter.com/vaibhavmuchandi"><i class="fab fa-twitter fa-2x fa-fw"></i></a></li>
+              <li class="list-inline-item"><a href="www.instagram.com/vaibhav.muchandi"><i class="fab fa-instagram fa-2x fa-fw"></i></a></li>
+              <li class="list-inline-item"><a href="https://wa.me/918105937586"><i class="fab fa-whatsapp fa-2x fa-fw"></i></a></li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
-  </footer>
+    </footer>
   </body>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMtQOCpkOkgSeVgBwwtPrUh5A9QW32iqc&libraries=places"></script>
   <script src="assets/js/google-address-autocomplete.min.js"></script>
@@ -118,7 +122,6 @@
   <script src="assets/bootstrap/js/bootstrap.min.js"></script>
   <script>
     var placeid = ""
-
     function set() {
       document.getElementById('resultid').value = placeid;
     }
