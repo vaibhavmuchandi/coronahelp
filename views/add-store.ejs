@@ -47,58 +47,57 @@
                   <button type="button" class="btn btn-primary" data-toggle="modal" onclick="sendOTP()">Send OTP</button>
                 </div>
               </div>
-              <% if(alert=='Invalid OTP') {%>
-              <p><%=alert%></p>
-              <%}%>
-                <div class="form-label-group">
-                  <input type="text" id="storeAddress" class="form-control" placeholder="storeAddress" name="storeAddress" value="<%=details.storeFullAddress%>" required autofocus>
-              <label for="storeAddress">Store Full Address</label>
-          </div>
-          <div class="form-label-group">
-            <input type="text" id="storeLandmark" class="form-control" placeholder="storeLandmark" name="storeLandmark" value="<%=details.landmark%>" autofocus>
-            <label for="storeLandmark">Landmark</label>
-          </div>
+              <div class="form-label-group">
+                <input type="text" id="storeAddress" class="form-control" placeholder="storeAddress" name="storeAddress" value="<%=details.storeFullAddress%>" required autofocus>
+                <label for="storeAddress">Store Full Address</label>
+              </div>
+              <div class="form-label-group">
+                <input type="text" id="storeLandmark" class="form-control" placeholder="storeLandmark" name="storeLandmark" value="<%=details.landmark%>" autofocus>
+                <label for="storeLandmark">Landmark</label>
+              </div>
 
-          <div id="itemSelling">
-            <div class="items" style="display: inline; margin-right: 7%;">
-              <label for="itemSelling">Items available:</label>
-            </div><br>
-            <div class="items" style="display: inline; margin-right: 7%;">
-              <input type="checkbox" class="form-check-input" id="itemGrocery" onclick='buildList("Groceries")'> Groceries
-            </div><br>
-            <div class="items" style="display: inline; margin-right: 7%;">
-              <input type="checkbox" class="form-check-input" id="itemVegetables" onclick='buildList("Vegetables")'> Vegetables
-            </div>
-            <br>
-            <div class="items" style="display: inline; margin-right: 7%;">
-              <input type="checkbox" class="form-check-input" id="itemGrains" onclick='buildList("Grains and Pulses")'> Grains and Pulses
-            </div>
-            <br>
-            <div class="items" style="display: inline; margin-right: 7%;">
-              <input type="checkbox" class="form-check-input" id="itemMedicines" onclick='buildList("Medicines")'> Medicines
-            </div><br>
-            <div class="items" style="display: inline; margin-right: 7%;">
-              <input type="checkbox" class="form-check-input" id="itemWater" onclick='buildList("Water Supplies")'> Water Supplies
-            </div><br>
-            <div class="items" style="display: inline; margin-right: 7%;">
-              <input type="checkbox" class="form-check-input" id="itemPet" onclick='buildList("Pet Supplies")'> Pet Supplies
-            </div>
-          </div>
-          <input type="text" id="items" name="items" hidden>
-          <% if(valid) { %>
-          <button class="btn btn-lg btn-primary btn-block text-uppercase" style="margin-top: 20px;">Submit</button>
-          <% } else {%>
-          <%if(alert==1) {%>
-          <p style="color: red;">Please verify your mobile number by OTP</p>
-          <%}%>
+              <div id="itemSelling">
+                <div class="items" style="display: inline; margin-right: 7%;">
+                  <label for="itemSelling">Items available:</label>
+                </div><br>
+                <div class="items" style="display: inline; margin-right: 7%;">
+                  <input type="checkbox" class="form-check-input" id="itemGrocery" onclick='buildList("Groceries")'> Groceries
+                </div><br>
+                <div class="items" style="display: inline; margin-right: 7%;">
+                  <input type="checkbox" class="form-check-input" id="itemVegetables" onclick='buildList("Vegetables")'> Vegetables
+                </div>
+                <br>
+                <div class="items" style="display: inline; margin-right: 7%;">
+                  <input type="checkbox" class="form-check-input" id="itemGrains" onclick='buildList("Grains and Pulses")'> Grains and Pulses
+                </div>
+                <br>
+                <div class="items" style="display: inline; margin-right: 7%;">
+                  <input type="checkbox" class="form-check-input" id="itemMedicines" onclick='buildList("Medicines")'> Medicines
+                </div><br>
+                <div class="items" style="display: inline; margin-right: 7%;">
+                  <input type="checkbox" class="form-check-input" id="itemWater" onclick='buildList("Water Supplies")'> Water Supplies
+                </div><br>
+                <div class="items" style="display: inline; margin-right: 7%;">
+                  <input type="checkbox" class="form-check-input" id="itemPet" onclick='buildList("Pet Supplies")'> Pet Supplies
+                </div>
+              </div>
+              <input type="text" id="items" name="items" hidden>
+              <% if(valid) { %>
+              <button class="btn btn-lg btn-primary btn-block text-uppercase" style="margin-top: 20px;">Submit</button>
+              <% } else {%>
+              <%if(alert==1) {%>
+              <br>
+              <p style="color: red;">Please verify your mobile number by OTP</p>
+              <%}%>
           <button class="btn btn-lg btn-primary btn-block text-uppercase" style="margin-top: 20px;" disabled>Submit</button>
           <%}%>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     </div>
-    </div>
   </header>
+
 
   <form action="/send-otp" method="post" hidden>
     <input type="text" name="details" id="details">
@@ -127,6 +126,9 @@
                 <button class="btn btn-primary">Verify</button>
               </div>
             </div>
+            <% if(valid==false) {%>
+            <div class="alert alert-danger"><%=alert%></div>
+            <%}%>
           </form>
         </div>
         <div class="modal-footer">
@@ -139,6 +141,11 @@
     <script src="assets/js/google-address-autocomplete.min.js"></script>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <%if(valid==false){%>
+            <script type="text/javascript">
+              $('#otpModal').modal('show');
+            </script>
+            <%}%>
     <script>
       function sendOTP() {
         $('#otpModal').modal('show');
