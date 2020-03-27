@@ -56,9 +56,11 @@ module.exports = (app, passport) => {
         console.log(err);
         res.send(err);
       } else {
-        res.send("Thank you")
+        res.render('thank-you')
         console.log(createdStore)
       }
     })
   })
+
 }
+
