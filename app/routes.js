@@ -58,6 +58,7 @@ module.exports = (app, passport) => {
     storeAddress = req.body.storeAddress;
     storeLandmark = req.body.storeLandmark;
     itemsAvailable = req.body.items;
+    storeDelivery = req.body.radio
     var newStore = {
       storeLocation: storeLocality,
       storeArea: storeArea,
@@ -65,7 +66,8 @@ module.exports = (app, passport) => {
       storeContact: storeContact,
       storeFullAddress: storeAddress,
       storeLandmark: storeLandmark,
-      storeItems: itemsAvailable
+      storeItems: itemsAvailable,
+      storeDelivery: storeDelivery
     }
     Store.create(newStore, function(err, createdStore) {
       if (err) {
@@ -73,7 +75,6 @@ module.exports = (app, passport) => {
         res.send(err);
       } else {
         res.render('thank-you')
-        console.log(createdStore)
       }
     })
   })
@@ -95,7 +96,6 @@ module.exports = (app, passport) => {
       if (error) throw new Error(error);
       let det = JSON.parse(body)
       app.set('sessionNum', det.Details);
-      console.log(det.Details);
     });
   })
 

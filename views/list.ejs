@@ -77,11 +77,15 @@
                 <h4><%=stores[i].storeItems%> </h4>
                 <p>Items</p>
               </div>
+              <div class="store-detail">
+                <i class="fa fa-landmark"></i>
+                <h4><%=stores[i].storeDelivery%></h4>
+                <p>Providing home delivery?</p>
+              </div>
             </div>
           </div>
           <br>
           <% } %>
-
         </section>
         <%}%>
       </div>
@@ -123,7 +127,6 @@
   <script src="assets/bootstrap/js/bootstrap.min.js"></script>
   <script>
     var placeid = ""
-
     function set() {
       document.getElementById('resultid').value = placeid;
     }
