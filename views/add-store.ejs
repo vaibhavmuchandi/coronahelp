@@ -33,7 +33,7 @@
                 <input type="text" id="autocomplete" class="form-control" placeholder="Locality" name="autocomplete" value="<%=details.locality%>" required autofocus>
                 <label for="autocomplete">Locality</label>
               </div>
-              <input type="text" id="resultid" name="resultid" hidden>
+              <input type="text" id="resultid" name="resultid" value="<%=details.placeid%>" hidden>
               <div class="form-label-group">
                 <input type="text" id="storeName" class="form-control" placeholder="storeName" name="storeName" value="<%=details.storeName%>" required autofocus>
                 <label for="storeName">Store Name</label>
@@ -62,10 +62,10 @@
           <div id="itemSelling">
             <div class="items" style="display: inline; margin-right: 7%;">
               <label for="itemSelling">Items available:</label>
-            </div>
+            </div><br>
             <div class="items" style="display: inline; margin-right: 7%;">
               <input type="checkbox" class="form-check-input" id="itemGrocery" onclick='buildList("Groceries")'> Groceries
-            </div>
+            </div><br>
             <div class="items" style="display: inline; margin-right: 7%;">
               <input type="checkbox" class="form-check-input" id="itemVegetables" onclick='buildList("Vegetables")'> Vegetables
             </div>
@@ -76,10 +76,10 @@
             <br>
             <div class="items" style="display: inline; margin-right: 7%;">
               <input type="checkbox" class="form-check-input" id="itemMedicines" onclick='buildList("Medicines")'> Medicines
-            </div>
+            </div><br>
             <div class="items" style="display: inline; margin-right: 7%;">
               <input type="checkbox" class="form-check-input" id="itemWater" onclick='buildList("Water Supplies")'> Water Supplies
-            </div>
+            </div><br>
             <div class="items" style="display: inline; margin-right: 7%;">
               <input type="checkbox" class="form-check-input" id="itemPet" onclick='buildList("Pet Supplies")'> Pet Supplies
             </div>
@@ -100,7 +100,7 @@
     </div>
   </header>
 
-  <form action="/add-store/send-otp" method="post" hidden>
+  <form action="/send-otp" method="post" hidden>
     <input type="text" name="details" id="details">
     <input type="text" id="phoneNumber" name="phoneNumber">
     <button id="otp-button">submit</button>
@@ -117,9 +117,10 @@
         </div>
         <div class="modal-body">
           <p>Please enter the OTP sent to your mobile number</p>
-          <form action="/add-store/verify-otp" method="post" class="form-signin">
+          <form action="/verify-otp" method="post" class="form-signin">
             <div class="form-row">
               <div class="form-label-group col-md-8">
+                <label for="otp">OTP</label>
                 <input type="text" id="otp" class="form-control" placeholder="Enter 6-digit OTP" name="otp" required autofocus>
               </div>
               <div class="col-md-4">
@@ -143,6 +144,7 @@
         $('#otpModal').modal('show');
         let details = {
           locality: document.getElementById('autocomplete').value,
+          placeid: document.getElementById('resultid').value,
           storeName: document.getElementById('storeName').value,
           storeContact: document.getElementById('storeContact').value,
           storeFullAddress: document.getElementById('storeAddress').value,

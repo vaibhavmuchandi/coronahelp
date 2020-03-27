@@ -42,6 +42,7 @@ module.exports = (app, passport) => {
 
   app.post('/add-store', (req, res) => {
     storeName = req.body.storeName;
+    storeArea = req.body.autocomplete;
     storeLocality = req.body.resultid;
     storeContact = req.body.storeContact;
     storeAddress = req.body.storeAddress;
@@ -49,6 +50,7 @@ module.exports = (app, passport) => {
     itemsAvailable = req.body.items;
     var newStore = {
       storeLocation: storeLocality,
+      storeArea: storeArea,
       storeName: storeName,
       storeContact: storeContact,
       storeFullAddress: storeAddress,
@@ -66,11 +68,10 @@ module.exports = (app, passport) => {
     })
   })
 
-  app.post('/add-store/send-otp', (req, res, next) => {
+  app.post('/send-otp', (req, res, next) => {
     let phoneNumber = req.body.phoneNumber;
     let details = JSON.parse(req.body.details);
     app.set('details', details);
-    console.log(phoneNumber, details);
     var options = {
       method: 'GET',
       url: 'http://2factor.in/API/V1/e84b3273-63bb-11ea-9fa5-0200cd936042/SMS/' + phoneNumber + '/AUTOGEN',
@@ -88,7 +89,7 @@ module.exports = (app, passport) => {
     });
   })
 
-  app.post('/add-store/verify-otp', (req, res) => {
+  app.post('/verify-otp', (req, res) => {
     let sessNum = app.get('sessionNum');
     let details = app.get('details');
     var verificationCode = req.body.otp;
