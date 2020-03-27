@@ -14,6 +14,7 @@ module.exports = (app, passport) => {
   app.post('/list-stores', (req, res) => {
     let placeid = req.body.resultid;
     let area = req.body.autocomplete;
+    area = area.replace(/belagavi/ig, 'Belgaum');
     Store.find({
         $or: [{
           storeLocation: placeid
@@ -51,6 +52,7 @@ module.exports = (app, passport) => {
   app.post('/add-store', (req, res) => {
     storeName = req.body.storeName;
     storeArea = req.body.autocomplete;
+    storeArea = storeArea.replace(/belagavi/ig, 'Belgaum');
     storeLocality = req.body.resultid;
     storeContact = req.body.storeContact;
     storeAddress = req.body.storeAddress;
