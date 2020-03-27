@@ -66,7 +66,7 @@ module.exports = (app, passport) => {
     })
   })
 
-  app.post('/add-store/send-otp', (req, res, next) => {
+  app.post('/send-otp', (req, res, next) => {
     let phoneNumber = req.body.phoneNumber;
     let details = JSON.parse(req.body.details);
     app.set('details', details);
@@ -88,7 +88,7 @@ module.exports = (app, passport) => {
     });
   })
 
-  app.post('/add-store/verify-otp', (req, res) => {
+  app.post('/verify-otp', (req, res) => {
     let sessNum = app.get('sessionNum');
     let details = app.get('details');
     var verificationCode = req.body.otp;

@@ -73,6 +73,9 @@
             <div class="items" style="display: inline; margin-right: 7%;">
               <input type="checkbox" class="form-check-input" id="itemGrains" onclick='buildList("Grains and Pulses")'> Grains and Pulses
             </div>
+            <div class="items" style="display: inline; margin-right: 7%;">
+              <input type="checkbox" class="form-check-input" id="itemToiletries" onclick='buildList("Toiletries")'> Toiletries
+            </div>
             <br>
             <div class="items" style="display: inline; margin-right: 7%;">
               <input type="checkbox" class="form-check-input" id="itemMedicines" onclick='buildList("Medicines")'> Medicines
@@ -100,7 +103,7 @@
     </div>
   </header>
 
-  <form action="/add-store/send-otp" method="post" hidden>
+  <form action="/send-otp" method="post" hidden>
     <input type="text" name="details" id="details">
     <input type="text" id="phoneNumber" name="phoneNumber">
     <button id="otp-button">submit</button>
@@ -117,7 +120,7 @@
         </div>
         <div class="modal-body">
           <p>Please enter the OTP sent to your mobile number</p>
-          <form action="/add-store/verify-otp" method="post" class="form-signin">
+          <form action="/verify-otp" method="post" class="form-signin">
             <div class="form-row">
               <div class="form-label-group col-md-8">
                 <input type="text" id="otp" class="form-control" placeholder="Enter 6-digit OTP" name="otp" required autofocus>
