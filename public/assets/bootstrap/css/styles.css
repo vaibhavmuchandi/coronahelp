@@ -2,6 +2,10 @@ body {
   height: 100%;
 }
 
+a:hover {
+  text-decoration: none !important;
+}
+
 #submit-button {
   margin-left: 30%;
   padding-top: 20px;
@@ -18,7 +22,16 @@ checkbox {
 .mission {
   padding: 50px;
   margin: 0 20px;
-  color: #084177;
+  /* color: #084177; */
+}
+
+.cities {
+  padding: 30px;
+  background: #eee;
+}
+
+.cities .list-group .list-group-item {
+  background: #eee;
 }
 
 @media (min-width:700px) {

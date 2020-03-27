@@ -2,7 +2,17 @@ module.exports = (app, passport) => {
   let request = require('request');
   let Store = require('../app/models/stores');
   app.get('/', (req, res) => {
-    res.render('index')
+    let cities = new Set();
+    Store.distinct('storeArea', (err, areas) => {
+      areas.forEach((area) => {
+        let parts = area.split(',')
+        let length = parts.length;
+        cities.add(parts[length - 3].trim() + ',' + parts[length - 2]);
+      })
+      res.render('index', {
+        cities: [...cities].sort()
+      })
+    })
   })
 
   app.get('/list-stores', (req, res) => {

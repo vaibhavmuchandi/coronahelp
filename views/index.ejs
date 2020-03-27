@@ -38,7 +38,7 @@
             </div>
           </form>
           <div id="add-store-btn"><button class="btn btn-primary btn-block btn-lg" href="/add-store">Add your store!</button></div>
-          <div style="margin-top: 20px;">
+          <div id="share-icons" style="margin-top: 20px;">
             <h4>Share via:</h4><a href="https://wa.me/?text=Check out www.corona-help.in! The COVID-19 pandemic is steadily spreading in India, and our daily routines are all but disrupted.
 With the 3 week lockdown in place, and restrictions on leaving our homes, it can be difficult to understand which stores are open for necessary supplies and where to go to find them.
 
@@ -62,6 +62,20 @@ And for everyone else, stay home, stay safe, use our site and go out only when a
     </div>
   </header>
 
+  <section class="cities">
+    <h4 class="text-center">Cities With Entries</h4>
+    <div class="row">
+      <div class="col-sm-1 col-md-4"></div>
+      <ul class="list-group list-group-flush text-center col-sm-10 col-md-4">
+        <%for(let i in cities) {%>
+        <li class="list-group-item"><%=cities[i]%></li>
+        <%}%>
+      </ul>
+    </div>
+    <br>
+  <a href="#share-icons"> <p class="text-muted  mb-4 mb-lg-0" style="text-align: center;">Can't find your city? Help spread the word!</p></a>
+
+  </section>
   <section class="mission">
     <p> The COVID-19 pandemic is steadily spreading in India, and our daily routines are all but disrupted.
       With the 3-week lockdown in place, and restrictions on leaving our homes, it can be difficult to understand which stores are open for necessary supplies and where to go to find them.
