@@ -42,6 +42,7 @@ module.exports = (app, passport) => {
 
   app.post('/add-store', (req, res) => {
     storeName = req.body.storeName;
+    storeArea = req.body.autocomplete;
     storeLocality = req.body.resultid;
     storeContact = req.body.storeContact;
     storeAddress = req.body.storeAddress;
@@ -49,6 +50,7 @@ module.exports = (app, passport) => {
     itemsAvailable = req.body.items;
     var newStore = {
       storeLocation: storeLocality,
+      storeArea: storeArea,
       storeName: storeName,
       storeContact: storeContact,
       storeFullAddress: storeAddress,
@@ -70,7 +72,6 @@ module.exports = (app, passport) => {
     let phoneNumber = req.body.phoneNumber;
     let details = JSON.parse(req.body.details);
     app.set('details', details);
-    console.log(phoneNumber, details);
     var options = {
       method: 'GET',
       url: 'http://2factor.in/API/V1/e84b3273-63bb-11ea-9fa5-0200cd936042/SMS/' + phoneNumber + '/AUTOGEN',
