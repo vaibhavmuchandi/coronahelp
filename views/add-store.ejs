@@ -85,6 +85,13 @@
               <input type="checkbox" class="form-check-input" id="itemPet" onclick='buildList("Pet Supplies")'> Pet Supplies
             </div>
           </div>
+            <div class="items" style="display: inline; margin-right: 7%;">
+              <br>
+              Are you willing to provide home delivery?
+              <div style=""><input type="radio" name="radio" class="form-check-input" id="delivery" value="Yes"> Yes </div>
+              <div><input type="radio" name="radio" class="form-check-input" id="delivery" value="No"> No </div>
+            </div>
+          </div>
           <input type="text" id="items" name="items" hidden>
           <% if(valid) { %>
           <button class="btn btn-lg btn-primary btn-block text-uppercase" style="margin-top: 20px;">Submit</button>
