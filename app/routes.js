@@ -13,8 +13,16 @@ module.exports = (app, passport) => {
   })
   app.post('/list-stores', (req, res) => {
     let placeid = req.body.resultid;
+    let area = req.body.autocomplete;
     Store.find({
-        storeLocation: placeid
+        $or: [{
+          storeLocation: placeid
+        }, {
+          storeArea: {
+            $regex: area,
+            $options: 'i'
+          }
+        }]
       })
       .exec((err, stores) => {
         if (stores.length != 0) {
