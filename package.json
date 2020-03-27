@@ -2,7 +2,14 @@
   "name": "coronafight",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "deploy": "gcloud app deploy",
+    "lint": "samples lint",
+    "pretest": "npm run lint",
+    "test": "ava --verbose test/*.test.js"
+  },
   "dependencies": {
     "bcrypt": "^4.0.1",
     "bcrypt-nodejs": "0.0.3",

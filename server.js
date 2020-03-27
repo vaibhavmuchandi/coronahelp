@@ -1,5 +1,4 @@
 var express = require('express');
-var port = process.env.PORT || 3000;
 var mongoose = require('mongoose');
 var flash = require('connect-flash');
 var bodyParser = require('body-parser');
@@ -32,4 +31,7 @@ app.use(bodyParser.urlencoded({
 
 require('./app/routes')(app);
 
-app.listen(3000, () => console.log(`Server started at ${port}`));
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}...`);
+});
