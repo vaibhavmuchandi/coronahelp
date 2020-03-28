@@ -215,3 +215,10 @@ checkbox {
   text-align: center;
   font-size: 30px;
 }
+
+@media (min-width:700px) {
+  .table-sm td, .table-sm th {
+    margin-left: 60px;
+    font-size: 20px;
+  }
+}

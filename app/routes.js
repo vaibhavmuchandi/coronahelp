@@ -216,6 +216,10 @@ module.exports = (app, passport) => {
     });
   });
 
+  app.get('/vegetable-vans-belgaum', (req, res) => {
+    res.render('vegetable-vans');
+  })
+
   app.use((req, res, next) => {
     res.status(502);
     res.render('index', {
