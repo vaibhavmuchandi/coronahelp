@@ -45,19 +45,13 @@
        <p class="text-muted  mb-4 mb-lg-0" style="text-align: center;">Can't find your city? Help spread the word!</p>
        <h4>Share via:</h4><a href="https://wa.me/?text=Check out www.corona-help.in! The COVID-19 pandemic is steadily spreading in India, and our daily routines are all but disrupted.
 With the 3 week lockdown in place, and restrictions on leaving our homes, it can be difficult to understand which stores are open for necessary supplies and where to go to find them.
-
 Through our site, shop owners and other businessmen can add their stores online and information about the supplies they have. Users can search for stores open in a particular area, and see the supplies they are keeping. This can reduce the efforts of searching for supplies in different stores.
-
 If you are a shop owner, do add your store to the list so that you can play your part in easing lives during these trying times.
-
 And for everyone else, stay home, stay safe, use our site and go out only when and where necessary!"><i class="fab fa-whatsapp" style="font-size:30px;color:green; margin-right: 20px;"></i></a>
             <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=Check out www.corona-help.in. The COVID-19 pandemic is steadily spreading in India, and our daily routines are all but disrupted.
     With the 3 week lockdown in place, and restrictions on leaving our homes, it can be difficult to understand which stores are open for necessary supplies and where to go to find them.
-
     Through our site, shop owners and other businessmen can add their stores online and information about the supplies they have. Users can search for stores open in a particular area, and see the supplies they are keeping. This can reduce the efforts of searching for supplies in different stores.
-
     If you are a shop owner, do add your store to the list so that you can play your part in easing lives during these trying times.
-
     And for everyone else, stay home, stay safe, use our site and go out only when and where necessary!" data-size="large"><i class="fab fa-twitter" style="font-size:30px;"></i></a>
       <br>
     </div>
@@ -65,11 +59,13 @@ And for everyone else, stay home, stay safe, use our site and go out only when a
 
     <% if(stores.length!=0) {%>
       <div class="container">
-        <div class="col-sm-8 col-md-4 col-lg-4 mx-auto" style="margin-top: 20px;">
-          Filters:
+        <div class="filters col-sm-10 col-md-4 col-lg-6 mx-auto" style="margin-top: 20px;">
+          <strong>Filters:</strong>
           <input type="checkbox" id="delivery" name="delivery" value="0" onclick='applyFilter("Delivery")'>Home Delivery
+          <br>
           <input type="checkbox" id="groceries" name="groceries" value="0" onclick='applyFilter("Groceries")'>Groceries
           <input type="checkbox" id="medicines" name="medicines" value="0" onclick='applyFilter("Medicines")'>Medicines
+          <br>
           <input type="checkbox" id="vegetables" name="vegetables" value="0" onclick='applyFilter("Vegetables")'>Vegetables
           <input type="checkbox" id="toiletries" name="toiletries" value="0" onclick='applyFilter("Toiletries")'>Toiletries
           <input type="checkbox" id="pet-supplies" name="petsupplies" value="0" onclick='applyFilter("Pet Supplies")'>Pet Supplies
@@ -78,56 +74,79 @@ And for everyone else, stay home, stay safe, use our site and go out only when a
             <input type="text" name="filters" id="filters" hidden>
             <button class="btn btn-secondary" style="font-size: 10px;">Apply</button>
           </form>
-
+          <%if(filters) {%>
+          <br>
+          <p><strong>Filters applied: <%=filters%></strong></p>
+          <%}%>
         </div>
-        <div class="col-sm-8 col-md-8 col-lg-4 mx-auto">
+        <div class="col-sm-9 col-md-8 col-lg-5 mx-auto">
           <section class="stores">
             <% for(let i in stores){ %>
-            <div class="stores card card-signin my-4">
-              <div class="card-header store-detail">
-                <i class="fa fa-store"></i>
-                <h4><%=stores[i].storeName%></h4>
+          <div class="stores card card-signin my-4">
+            <div class="card-header store-detail">
+              <i class="fa fa-store"></i>
+              <h4><%=stores[i].storeName%></h4>
+            </div>
+            <div class="card-body">
+              <div class="store-detail">
+                <i class="fa fa-map-marked-alt"></i>
+                <h4><%=stores[i].storeArea%></h4>
+                <p>Area</p>
               </div>
-              <div class="card-body">
-                <div class="store-detail">
-                  <i class="fa fa-map-marked-alt"></i>
-                  <h4><%=stores[i].storeArea%></h4>
-                  <p>Area</p>
+              <div class="store-detail">
+                <i class="fa fa-map-marker-alt"></i>
+                <h4><%=stores[i].storeFullAddress%></h4>
+                <p>Full Address</p>
+              </div>
+              <div class="store-detail">
+                <i class="fa fa-address-book"></i>
+                <h4><%=stores[i].storeContact%></h4>
+                <p>Contact</p>
+              </div>
+
+              <%if(stores[i].storeOpenTime || stores[i].storeCloseTime) {%>
+              <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                  <div class="store-detail">
+                    <i class="fa fa-clock"></i>
+                    <h4><%=stores[i].storeOpenTime%></h4>
+                    <p>Opening Time</p>
+                  </div>
                 </div>
-                <div class="store-detail">
-                  <i class="fa fa-map-marker-alt"></i>
-                  <h4><%=stores[i].storeFullAddress%></h4>
-                  <p>Full Address</p>
+
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                  <div class="store-detail">
+                    <i class="fa fa-clock"></i>
+                    <h4><%=stores[i].storeCloseTime%></h4>
+                    <p>Closing Time</p>
+                  </div>
                 </div>
-                <div class="store-detail">
-                  <i class="fa fa-address-book"></i>
-                  <h4><%=stores[i].storeContact%></h4>
-                  <p>Contact</p>
-                </div>
+              </div>
+              <%}%>
+
                 <div class="store-detail">
                   <i class="fa fa-landmark"></i>
                   <h4><%=stores[i].storeLandmark%></h4>
-                  <p>Landmark</p>
-                </div>
-                <div class="store-detail">
-                  <i class="fas fa-utensils"></i>
-                  <h4><%=stores[i].storeItems%> </h4>
-                  <p>Items</p>
-                </div>
-                <div class="store-detail">
-                  <i class="fa fa-home"></i>
-                  <h4><%=stores[i].storeDelivery%></h4>
-                  <p>Providing home delivery?</p>
-                </div>
-              </div>
+              <p>Landmark</p>
             </div>
-            <br>
-            <% } %>
-          </section>
-          <%}%>
+            <div class="store-detail">
+              <i class="fas fa-utensils"></i>
+              <h4><%=stores[i].storeItems%> </h4>
+              <p>Items</p>
+            </div>
+            <div class="store-detail">
+              <i class="fa fa-home"></i>
+              <h4><%=stores[i].storeDelivery%></h4>
+              <p>Providing home delivery?</p>
+            </div>
+          </div>
+        </div>
+        <br>
+        <% } %>
+        </section>
+        <%}%>
       </div>
     </div>
-
 
 
     <section class="showcase"></section>
@@ -170,12 +189,10 @@ And for everyone else, stay home, stay safe, use our site and go out only when a
         console.log(filters)
         document.getElementById('filters').value = filters
     }
-
     var placeid = ""
     function set() {
       document.getElementById('resultid').value = placeid;
     }
-
     const options = {
       componentRestrictions: {
         country: "in"
@@ -188,5 +205,4 @@ And for everyone else, stay home, stay safe, use our site and go out only when a
       set()
     });
   </script>
-
 </html>

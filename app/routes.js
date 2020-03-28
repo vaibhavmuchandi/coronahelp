@@ -4,7 +4,6 @@ module.exports = (app, passport) => {
   app.get('/', (req, res) => {
     let cities = new Set();
     Store.distinct('storeArea', (err, areas) => {
-      console.log(areas);
       areas.forEach((area) => {
         let parts = area.split(',')
         let length = parts.length;
@@ -29,6 +28,7 @@ module.exports = (app, passport) => {
     let placeid = req.body.resultid;
     let area = req.body.autocomplete;
     area = area.replace(/belagavi/ig, 'Belgaum');
+    res.locals.filters = null;
     Store.find({
         $or: [{
           storeLocation: placeid
@@ -63,6 +63,7 @@ module.exports = (app, passport) => {
 
   app.get('/apply-filters', (req, res) => {
     let stores = app.get('stores');
+    res.locals.filters = null;
     if (!stores) {
       res.render('list', {
         stores: [],
@@ -72,33 +73,39 @@ module.exports = (app, passport) => {
       res.render('list', {
         stores: stores,
         message: null,
-        delivery: false
       })
     }
   })
 
   app.post('/apply-filters', (req, res) => {
     let filters = req.body.filters.split(',');
+    res.locals.filters = filters.join(', ');
     let stores = app.get('stores');
     let message = null;
     let results = [];
     let items = null;
     if (stores) {
-      stores.forEach((store, i, arr) => {
-        items = store.storeItems.split(',');
-        if (items.some((item, i, arr) => {
-            return filters.indexOf(item) != -1
-          })) {
-          results.push(store);
-        }
-      })
-
-      if (filters.indexOf('Delivery') != -1)
-        results.filter((store, i, arr) => {
+      if (filters.length == 1 && filters[0] == 'Delivery') {
+        results = stores.filter((store, i, arr) => {
           return store.storeDelivery == 'Yes'
         })
+      } else {
+        stores.forEach((store, i, arr) => {
+          items = store.storeItems.split(',');
+          if (items.some((item, i, arr) => {
+              return filters.indexOf(item) != -1
+            })) {
+            results.push(store);
+          }
+        })
 
-      if (filters.length == 0)
+        if (filters.indexOf('Delivery') != -1)
+          results = results.filter((store, i, arr) => {
+            return store.storeDelivery == 'Yes'
+          })
+      }
+
+      if (results.length == 0)
         message = 'Sorry! No stores match your filters'
     }
 
@@ -123,18 +130,24 @@ module.exports = (app, passport) => {
     storeLocality = req.body.resultid;
     storeContact = req.body.storeContact;
     storeAddress = req.body.storeAddress;
+    storeOpenTime = req.body.storeOpenTime;
+    storeCloseTime = req.body.storeCloseTime;
     storeLandmark = req.body.storeLandmark;
     itemsAvailable = req.body.items;
-    storeDelivery = req.body.radio
+    storeDelivery = req.body.radio;
+    storeAdditional = req.body.storeAdditional;
     var newStore = {
       storeLocation: storeLocality,
       storeArea: storeArea,
       storeName: storeName,
       storeContact: storeContact,
       storeFullAddress: storeAddress,
+      storeOpenTime: storeOpenTime,
+      storeCloseTIme: storeCloseTime,
       storeLandmark: storeLandmark,
       storeItems: itemsAvailable,
-      storeDelivery: storeDelivery
+      storeDelivery: storeDelivery,
+      storeAdditional: storeAdditional
     }
     Store.create(newStore, function(err, createdStore) {
       if (err) {
