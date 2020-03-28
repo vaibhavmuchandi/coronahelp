@@ -61,7 +61,7 @@ module.exports = (app, passport) => {
       })
   })
 
-  app.get('/home-delivery', (req, res) => {
+  app.get('/apply-filters', (req, res) => {
     let stores = app.get('stores');
     if (!stores) {
       res.render('list', {
@@ -77,25 +77,34 @@ module.exports = (app, passport) => {
     }
   })
 
-  app.post('/home-delivery', (req, res) => {
-    let value = req.body.delivery;
+  app.post('/apply-filters', (req, res) => {
+    let filters = req.body.filters.split(',');
     let stores = app.get('stores');
     let message = null;
-    if (value) {
-      stores = stores.filter((store, i, arr) => {
-        return store.storeDelivery == 'Yes'
+    let results = [];
+    let items = null;
+    if (stores) {
+      stores.forEach((store, i, arr) => {
+        items = store.storeItems.split(',');
+        if (items.some((item, i, arr) => {
+            return filters.indexOf(item) != -1
+          })) {
+          results.push(store);
+        }
       })
-      res.locals.delivery = true
-    } else {
-      res.locals.delivery = false
+
+      if (filters.indexOf('Delivery') != -1)
+        results.filter((store, i, arr) => {
+          return store.storeDelivery == 'Yes'
+        })
+
+      if (filters.length == 0)
+        message = 'Sorry! No stores match your filters'
     }
 
-    if (stores.length == 0)
-      message = 'Sorry! No search results match your filter.';
-
     res.render('list', {
-      stores: stores,
-      message: message,
+      stores: results,
+      message: message
     })
   })
 
@@ -192,5 +201,12 @@ module.exports = (app, passport) => {
         });
       }
     });
+  });
+
+  app.use((req, res, next) => {
+    res.status(502);
+    res.render('index', {
+      cities: []
+    })
   })
 }
