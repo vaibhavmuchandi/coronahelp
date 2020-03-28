@@ -114,18 +114,24 @@ module.exports = (app, passport) => {
     storeLocality = req.body.resultid;
     storeContact = req.body.storeContact;
     storeAddress = req.body.storeAddress;
+    storeOpenTime = req.body.storeOpenTime;
+    storeCloseTime = req.body.storeCloseTime;
     storeLandmark = req.body.storeLandmark;
     itemsAvailable = req.body.items;
-    storeDelivery = req.body.radio
+    storeDelivery = req.body.radio;
+    storeAdditional = req.body.storeAdditional;
     var newStore = {
       storeLocation: storeLocality,
       storeArea: storeArea,
       storeName: storeName,
       storeContact: storeContact,
       storeFullAddress: storeAddress,
+      storeOpenTime: storeOpenTime,
+      storeCloseTIme: storeCloseTime,
       storeLandmark: storeLandmark,
       storeItems: itemsAvailable,
-      storeDelivery: storeDelivery
+      storeDelivery: storeDelivery,
+      storeAdditional: storeAdditional
     }
     Store.create(newStore, function(err, createdStore) {
       if (err) {

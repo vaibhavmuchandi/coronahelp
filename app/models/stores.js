@@ -8,7 +8,8 @@ var storeSchema = mongoose.Schema({
   storeFullAddress: String,
   storeLandmark: String,
   storeItems: String,
-  storeDelivery: String
+  storeDelivery: String,
+  storeAdditional: String
 });
 
 module.exports = mongoose.model('Store', storeSchema);

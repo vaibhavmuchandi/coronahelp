@@ -50,6 +50,16 @@
                 <input type="text" id="storeAddress" class="form-control" placeholder="storeAddress" name="storeAddress" value="<%=details.storeFullAddress%>" required autofocus>
                 <label for="storeAddress">Store Full Address</label>
               </div>
+              <div class="form-row">
+              <div class="form-label-group col-5 col-md-6">
+                <input type="time" id="storeOpenTime" class="form-control" placeholder="storeOpenTime" name="storeOpenTime" value="<%=details.storeOpenTime%>" autofocus>
+                <label for="storeOpenTime">Store Open Time</label>
+              </div>
+              <div class="form-label-group col-5 col-md-6">
+                <input type="time" id="storeCloseTime" class="form-control" placeholder="storeCloseTime" name="storeCloseTime" value="<%=details.storeCloseTime%>" autofocus>
+                <label for="storeCloseTime">Store Close Time</label>
+              </div>
+              </div>
               <div class="form-label-group">
                 <input type="text" id="storeLandmark" class="form-control" placeholder="storeLandmark" name="storeLandmark" value="<%=details.landmark%>" autofocus>
                 <label for="storeLandmark">Landmark</label>
@@ -87,6 +97,10 @@
                 Are you willing to provide home delivery?
                 <div style=""><input type="radio" name="radio" class="form-check-input" id="delivery" value="Yes"> Yes </div>
                 <div><input type="radio" name="radio" class="form-check-input" id="delivery" value="No"> No </div>
+              </div>
+              <div class="form-label-group">
+                <input type="text" id="storeAdditional" class="form-control" placeholder="storeAdditional" name="storeAdditional" value="<%=details.additional%>" autofocus>
+                <label for="storeAdditional">Any Additional Information</label>
               </div>
           </div>
           <input type="text" id="items" name="items" hidden>
