@@ -43,6 +43,7 @@ module.exports = (app, passport) => {
         storeName: 1
       })
       .exec((err, stores) => {
+        console.log(stores);
         if (stores.length != 0) {
           app.set('stores', stores);
           res.render('list', {
@@ -218,6 +219,13 @@ module.exports = (app, passport) => {
 
   app.use((req, res, next) => {
     res.status(502);
+    res.render('index', {
+      cities: []
+    })
+  })
+
+  app.use((req, res, next) => {
+    res.status(404);
     res.render('index', {
       cities: []
     })
