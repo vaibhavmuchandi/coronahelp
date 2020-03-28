@@ -60,15 +60,16 @@ And for everyone else, stay home, stay safe, use our site and go out only when a
     <% if(stores.length!=0) {%>
       <div class="container">
         <div class="filters col-sm-10 col-md-4 col-lg-6 mx-auto" style="margin-top: 20px;">
-          <strong>Filters:</strong>
+          <strong><i class="fa fa-filter"></i> Filters:</strong><br>
           <input type="checkbox" id="delivery" name="delivery" value="0" onclick='applyFilter("Delivery")'>Home Delivery
-          <br>
           <input type="checkbox" id="groceries" name="groceries" value="0" onclick='applyFilter("Groceries")'>Groceries
-          <input type="checkbox" id="medicines" name="medicines" value="0" onclick='applyFilter("Medicines")'>Medicines
           <br>
+          <input type="checkbox" id="medicines" name="medicines" value="0" onclick='applyFilter("Medicines")'>Medicines
           <input type="checkbox" id="vegetables" name="vegetables" value="0" onclick='applyFilter("Vegetables")'>Vegetables
+          <br>
           <input type="checkbox" id="toiletries" name="toiletries" value="0" onclick='applyFilter("Toiletries")'>Toiletries
           <input type="checkbox" id="pet-supplies" name="petsupplies" value="0" onclick='applyFilter("Pet Supplies")'>Pet Supplies
+          <br>
           <input type="checkbox" id="water-supplies" name="watersupplies" value="0" onclick='applyFilter("Water Supplies")'>Water Supplies
           <form action="/apply-filters" method="post">
             <input type="text" name="filters" id="filters" hidden>
@@ -84,74 +85,82 @@ And for everyone else, stay home, stay safe, use our site and go out only when a
             <% for(let i in stores){ %>
           <div class="stores card card-signin my-4">
             <div class="card-header store-detail">
-              <i class="fa fa-store"></i>
-              <h4><%=stores[i].storeName%></h4>
-            </div>
-            <div class="card-body">
-              <div class="store-detail">
-                <i class="fa fa-map-marked-alt"></i>
-                <h4><%=stores[i].storeArea%></h4>
-                <p>Area</p>
+              <div class="store-icon">
+                <%if(stores[i].storeItems.indexOf('Pet Supplies')!=-1) {%>
+                <i class="fa fa-paw"></i>
+                <%} else if(stores[i].storeItems.indexOf('Medicines')!=-1) {%>
+                <i class="fa fa-clinic-medical"></i>
+                <%} else {%>
+                <i class="fa fa-store"></i>
+                <%}%>
               </div>
-              <div class="store-detail">
-                <i class="fa fa-map-marker-alt"></i>
-                <h4><%=stores[i].storeFullAddress%></h4>
-                <p>Full Address</p>
+              <h3><%=stores[i].storeName%></h3>
               </div>
-              <div class="store-detail">
-                <i class="fa fa-address-book"></i>
-                <h4><%=stores[i].storeContact%></h4>
-                <p>Contact</p>
-              </div>
-
-              <%if(stores[i].storeOpenTime || stores[i].storeCloseTime) {%>
-              <div class="row">
-                <div class="col-6 col-md-6 col-lg-6">
-                  <div class="store-detail">
-                    <i class="fa fa-clock"></i>
-                    <h4><%=stores[i].storeOpenTime%></h4>
-                    <p>Opening Time</p>
-                  </div>
+              <div class="card-body">
+                <div class="store-detail">
+                  <i class="fa fa-map-marked-alt text-center"></i>
+                  <h4><%=stores[i].storeArea%></h4>
+                  <p>Area</p>
+                </div>
+                <div class="store-detail">
+                  <i class="fa fa-map-marker-alt"></i>
+                  <h4><%=stores[i].storeFullAddress%></h4>
+                  <p>Full Address</p>
+                </div>
+                <div class="store-detail">
+                  <i class="fa fa-address-book"></i>
+                  <h4><%=stores[i].storeContact%></h4>
+                  <p>Contact</p>
                 </div>
 
-                <div class="col-6 col-md-6 col-lg-6">
-                  <div class="store-detail">
-                    <i class="fa fa-clock"></i>
-                    <h4><%=stores[i].storeCloseTime%></h4>
-                    <p>Closing Time</p>
+                <%if(stores[i].storeOpenTime || stores[i].storeCloseTime) {%>
+                <div class="row">
+                  <div class="col-6 col-md-6 col-lg-6">
+                    <div class="store-detail">
+                      <i class="fa fa-clock"></i>
+                      <h4><%=stores[i].storeOpenTime%></h4>
+                      <p>Opening Time</p>
+                    </div>
                   </div>
-                </div>
 
-              </div>
-              <%}%>
+                  <div class="col-6 col-md-6 col-lg-6">
+                    <div class="store-detail">
+                      <i class="fa fa-clock"></i>
+                      <h4><%=stores[i].storeCloseTime%></h4>
+                      <p>Closing Time</p>
+                    </div>
+                  </div>
+
+                </div>
+                <%}%>
                   <div class="store-detail">
                   <i class="fa fa-landmark"></i>
                   <h4><%=stores[i].storeLandmark%></h4>
-              <p>Landmark</p>
+                <p>Landmark</p>
+              </div>
+              <div class="store-detail">
+                <i class="fas fa-box-open"></i>
+                <h4><%=stores[i].storeItems%> </h4>
+                <p>Items</p>
+              </div>
+              <div class="store-detail">
+                <i class="fa fa-home"></i>
+                <h4><%=stores[i].storeDelivery%></h4>
+                <p>Providing home delivery?</p>
+              </div>
+              <%if(stores[i].storeAdditional){%>
+              <div class="store-detail">
+                <i class="fa fa-info-circle"></i>
+                <h4><%=stores[i].storeAdditional%></h4>
+                <p>Additional Information</p>
+              </div>
+              <% } %>
             </div>
-            <div class="store-detail">
-              <i class="fas fa-utensils"></i>
-              <h4><%=stores[i].storeItems%> </h4>
-              <p>Items</p>
-            </div>
-            <div class="store-detail">
-              <i class="fa fa-home"></i>
-              <h4><%=stores[i].storeDelivery%></h4>
-              <p>Providing home delivery?</p>
-            </div>
-            <%if(stores[i].storeAdditional){%>
-            <div class="store-detail">
-              <i class="fa fa-home"></i>
-              <h4><%=stores[i].storeAdditional%></h4>
-              <p>Additional Information</p>
-            </div>
-            <% } %>
           </div>
-        </div>
-        <br>
-        <% } %>
-        </section>
-        <%}%>
+          <br>
+          <% } %>
+          </section>
+          <%}%>
       </div>
     </div>
 
@@ -190,11 +199,14 @@ And for everyone else, stay home, stay safe, use our site and go out only when a
   <script src="assets/js/jquery.min.js"></script>
   <script src="assets/bootstrap/js/bootstrap.min.js"></script>
   <script>
-  let filters = []
+    let filters = []
     function applyFilter(filter) {
+      let index = filters.indexOf(filter);
+      if(index!=-1)
+        filters.splice(index, 1)
+      else
         filters.push(filter)
-        console.log(filters)
-        document.getElementById('filters').value = filters
+      document.getElementById('filters').value = filters
     }
     var placeid = ""
     function set() {

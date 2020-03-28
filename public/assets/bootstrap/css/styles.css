@@ -207,6 +207,11 @@ checkbox {
 }
 
 .filters input {
-  margin-left: 10px;
+  margin-left: 13px;
   margin-bottom: 8px;
+}
+
+.fa-store, .fa-paw, .fa-clinic-medical {
+  text-align: center;
+  font-size: 30px;
 }

@@ -43,7 +43,6 @@ module.exports = (app, passport) => {
         storeName: 1
       })
       .exec((err, stores) => {
-        console.log(stores);
         if (stores.length != 0) {
           app.set('stores', stores);
           res.render('list', {
