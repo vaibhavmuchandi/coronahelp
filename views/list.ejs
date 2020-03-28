@@ -45,71 +45,77 @@
        <p class="text-muted  mb-4 mb-lg-0" style="text-align: center;">Can't find your city? Help spread the word!</p>
        <h4>Share via:</h4><a href="https://wa.me/?text=Check out www.corona-help.in! The COVID-19 pandemic is steadily spreading in India, and our daily routines are all but disrupted.
 With the 3 week lockdown in place, and restrictions on leaving our homes, it can be difficult to understand which stores are open for necessary supplies and where to go to find them.
-
 Through our site, shop owners and other businessmen can add their stores online and information about the supplies they have. Users can search for stores open in a particular area, and see the supplies they are keeping. This can reduce the efforts of searching for supplies in different stores.
-
 If you are a shop owner, do add your store to the list so that you can play your part in easing lives during these trying times.
-
 And for everyone else, stay home, stay safe, use our site and go out only when and where necessary!"><i class="fab fa-whatsapp" style="font-size:30px;color:green; margin-right: 20px;"></i></a>
             <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=Check out www.corona-help.in. The COVID-19 pandemic is steadily spreading in India, and our daily routines are all but disrupted.
     With the 3 week lockdown in place, and restrictions on leaving our homes, it can be difficult to understand which stores are open for necessary supplies and where to go to find them.
-
     Through our site, shop owners and other businessmen can add their stores online and information about the supplies they have. Users can search for stores open in a particular area, and see the supplies they are keeping. This can reduce the efforts of searching for supplies in different stores.
-
     If you are a shop owner, do add your store to the list so that you can play your part in easing lives during these trying times.
-
     And for everyone else, stay home, stay safe, use our site and go out only when and where necessary!" data-size="large"><i class="fab fa-twitter" style="font-size:30px;"></i></a>
       <br>
     </div>
-    
+
 
     <% if(stores.length!=0) {%>
-    <div class="container">
-      <div class="col-sm-8 col-md-2 col-lg-2 mx-auto"></div>
-      <div class="col-sm-8 col-md-8 col-lg-4 mx-auto">
-        <section class="stores">
-          <% for(let i in stores){ %>
-          <div class="stores card card-signin my-4">
-            <div class="card-header store-detail">
-              <i class="fa fa-store"></i>
-              <h4><%=stores[i].storeName%></h4>
+      <div class="container">
+        <div class="col-sm-8 col-md-2 col-lg-4 mx-auto" style="margin-top: 20px;">
+          <form action="/home-delivery" method="post">
+            <%if(delivery) {%>
+            Filter: <input type="checkbox" name="delivery" value="0" checked="checked" onclick="applyFilter()">Home Delivery
+            <%} else {%>
+            <h6>Filter: <input type="checkbox" name="delivery" value="1" onclick="applyFilter()">Home Delivery</h6>
+            <%}%>
+            <button id="filter" hidden></button>
+            </form>
+        </div>
+        <div class="col-sm-8 col-md-8 col-lg-4 mx-auto">
+          <section class="stores">
+            <% for(let i in stores){ %>
+            <div class="stores card card-signin my-4">
+              <div class="card-header store-detail">
+                <i class="fa fa-store"></i>
+                <h4><%=stores[i].storeName%></h4>
+              </div>
+              <div class="card-body">
+                <div class="store-detail">
+                  <i class="fa fa-map-marked-alt"></i>
+                  <h4><%=stores[i].storeArea%></h4>
+                  <p>Area</p>
+                </div>
+                <div class="store-detail">
+                  <i class="fa fa-map-marker-alt"></i>
+                  <h4><%=stores[i].storeFullAddress%></h4>
+                  <p>Full Address</p>
+                </div>
+                <div class="store-detail">
+                  <i class="fa fa-address-book"></i>
+                  <h4><%=stores[i].storeContact%></h4>
+                  <p>Contact</p>
+                </div>
+                <div class="store-detail">
+                  <i class="fa fa-landmark"></i>
+                  <h4><%=stores[i].storeLandmark%></h4>
+                  <p>Landmark</p>
+                </div>
+                <div class="store-detail">
+                  <i class="fas fa-utensils"></i>
+                  <h4><%=stores[i].storeItems%> </h4>
+                  <p>Items</p>
+                </div>
+                <div class="store-detail">
+                  <i class="fa fa-home"></i>
+                  <h4><%=stores[i].storeDelivery%></h4>
+                  <p>Providing home delivery?</p>
+                </div>
+              </div>
             </div>
-            <div class="card-body">
-              <div class="store-detail">
-                <i class="fa fa-map-marker-alt"></i>
-                <h4><%=stores[i].storeFullAddress%></h4>
-                <p>Full Address</p>
-              </div>
-              <div class="store-detail">
-                <i class="fa fa-address-book"></i>
-                <h4><%=stores[i].storeContact%></h4>
-                <p>Contact</p>
-              </div>
-              <div class="store-detail">
-                <i class="fa fa-landmark"></i>
-                <h4><%=stores[i].storeLandmark%></h4>
-                <p>Landmark</p>
-              </div>
-              <div class="store-detail">
-                <i class="fas fa-utensils"></i>
-                <h4><%=stores[i].storeItems%> </h4>
-                <p>Items</p>
-              </div>
-              <div class="store-detail">
-                <i class="fa fa-landmark"></i>
-                <h4><%=stores[i].storeDelivery%></h4>
-                <p>Providing home delivery?</p>
-              </div>
-            </div>
-          </div>
-          <br>
-          <% } %>
-        </section>
-        <%}%>
+            <br>
+            <% } %>
+            </section>
+            <%}%>
       </div>
     </div>
-
-
     <section class="showcase"></section>
     <footer class="footer bg-light" style="margin-top: 70px;">
       <p class="text-muted small mb-4 mb-lg-0" style="text-align: center;">Made with ♥ by Vaibhav Muchandi and Varun Shiri</p>
@@ -129,10 +135,10 @@ And for everyone else, stay home, stay safe, use our site and go out only when a
           </div>
           <div class="col-lg-6 my-auto h-100 text-center text-lg-right">
            <ul class="list-inline mb-0">
-            <li class="list-inline-item"><a href="https://www.facebook.com/vaibhavmuchandii"><i class="fa fa-facebook fa-2x fa-fw"></i></a></li>
-            <li class="list-inline-item"><a href="https://www.twitter.com/VaibhavMuchand3"><i class="fa fa-twitter fa-2x fa-fw"></i></a></li>
-            <li class="list-inline-item"><a href="https://www.instagram.com/vaibhav.muchandi"><i class="fa fa-instagram fa-2x fa-fw"></i></a></li>
-            <li class="list-inline-item"><a href="https://wa.me/918105937586"><i class="fa fa-whatsapp fa-2x fa-fw"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.facebook.com/vaibhavmuchandii"><i class="fab fa-facebook fa-2x fa-fw"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.twitter.com/vaibhavmuchandi"><i class="fab fa-twitter fa-2x fa-fw"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.instagram.com/vaibhav.muchandi"><i class="fab fa-instagram fa-2x fa-fw"></i></a></li>
+            <li class="list-inline-item"><a href="https://wa.me/918105937586"><i class="fab fa-whatsapp fa-2x fa-fw"></i></a></li>
           </ul>
           </div>
         </div>
@@ -144,6 +150,9 @@ And for everyone else, stay home, stay safe, use our site and go out only when a
   <script src="assets/js/jquery.min.js"></script>
   <script src="assets/bootstrap/js/bootstrap.min.js"></script>
   <script>
+    function applyFilter() {
+      document.getElementById('filter').click()
+    }
     var placeid = ""
     function set() {
       document.getElementById('resultid').value = placeid;
@@ -160,5 +169,4 @@ And for everyone else, stay home, stay safe, use our site and go out only when a
       set()
     });
   </script>
-
 </html>

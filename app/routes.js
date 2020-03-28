@@ -4,10 +4,12 @@ module.exports = (app, passport) => {
   app.get('/', (req, res) => {
     let cities = new Set();
     Store.distinct('storeArea', (err, areas) => {
+      console.log(areas);
       areas.forEach((area) => {
         let parts = area.split(',')
         let length = parts.length;
-        cities.add(parts[length - 3].trim() + ',' + parts[length - 2]);
+        if (length >= 3)
+          cities.add(parts[length - 3].trim() + ',' + parts[length - 2]);
       })
       res.render('index', {
         cities: [...cities].sort()
@@ -21,6 +23,8 @@ module.exports = (app, passport) => {
       message: 'Enter a location to search for stores'
     })
   })
+
+
   app.post('/list-stores', (req, res) => {
     let placeid = req.body.resultid;
     let area = req.body.autocomplete;
@@ -35,20 +39,64 @@ module.exports = (app, passport) => {
           }
         }]
       })
+      .sort({
+        storeName: 1
+      })
       .exec((err, stores) => {
         if (stores.length != 0) {
+          app.set('stores', stores);
           res.render('list', {
             stores: stores,
-            message: null
+            message: null,
+            delivery: false
           })
         } else {
           res.render('list', {
             stores: [],
-            message: 'Sorry! There seem to be no stores from this area on our site.'
+            message: 'Sorry! There seem to be no stores from this area on our site.',
+            delivery: false
           })
         }
 
       })
+  })
+
+  app.get('/home-delivery', (req, res) => {
+    let stores = app.get('stores');
+    if (!stores) {
+      res.render('list', {
+        stores: [],
+        message: 'Enter a location to search for stores'
+      })
+    } else {
+      res.render('list', {
+        stores: stores,
+        message: null,
+        delivery: false
+      })
+    }
+  })
+
+  app.post('/home-delivery', (req, res) => {
+    let value = req.body.delivery;
+    let stores = app.get('stores');
+    let message = null;
+    if (value) {
+      stores = stores.filter((store, i, arr) => {
+        return store.storeDelivery == 'Yes'
+      })
+      res.locals.delivery = true
+    } else {
+      res.locals.delivery = false
+    }
+
+    if (stores.length == 0)
+      message = 'Sorry! No search results match your filter.';
+
+    res.render('list', {
+      stores: stores,
+      message: message,
+    })
   })
 
   app.get('/add-store', (req, res) => {
@@ -106,6 +154,12 @@ module.exports = (app, passport) => {
       if (error) throw new Error(error);
       let det = JSON.parse(body)
       app.set('sessionNum', det.Details);
+    });
+
+    res.render('add-store', {
+      valid: false,
+      details: details,
+      alert: null
     });
   })
 

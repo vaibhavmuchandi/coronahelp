@@ -39,72 +39,69 @@
               </div>
               <div class="form-row">
                 <div class="form-label-group col-7 col-md-8">
-                  <input type="tel" id="storeContact" class="form-control" placeholder="storeContact" name="storeContact" value="<%=details.storeContact%>" required autofocus>
+                  <input type="tel" id="storeContact" class="form-control" placeholder="storeContact" name="storeContact" value="<%=details.storeContact%>" maxlength="10" required autofocus>
                   <label for="storeContact">Store Contact</label>
                 </div>
                 <div class="form-group col-5 col-md-4">
                   <button type="button" class="btn btn-primary" data-toggle="modal" onclick="sendOTP()">Send OTP</button>
                 </div>
               </div>
-              <% if(alert=='Invalid OTP') {%>
-              <p><%=alert%></p>
-              <%}%>
-                <div class="form-label-group">
-                  <input type="text" id="storeAddress" class="form-control" placeholder="storeAddress" name="storeAddress" value="<%=details.storeFullAddress%>" required autofocus>
-              <label for="storeAddress">Store Full Address</label>
-          </div>
-          <div class="form-label-group">
-            <input type="text" id="storeLandmark" class="form-control" placeholder="storeLandmark" name="storeLandmark" value="<%=details.landmark%>" autofocus>
-            <label for="storeLandmark">Landmark</label>
-          </div>
+              <div class="form-label-group">
+                <input type="text" id="storeAddress" class="form-control" placeholder="storeAddress" name="storeAddress" value="<%=details.storeFullAddress%>" required autofocus>
+                <label for="storeAddress">Store Full Address</label>
+              </div>
+              <div class="form-label-group">
+                <input type="text" id="storeLandmark" class="form-control" placeholder="storeLandmark" name="storeLandmark" value="<%=details.landmark%>" autofocus>
+                <label for="storeLandmark">Landmark</label>
+              </div>
 
-          <div id="itemSelling">
-            <div class="items" style="display: inline; margin-right: 7%;">
-              <label for="itemSelling">Items available:</label>
-            </div><br>
-            <div class="items" style="display: inline; margin-right: 7%;">
-              <input type="checkbox" class="form-check-input" id="itemGrocery" onclick='buildList("Groceries")'> Groceries
-            </div>
-            <div class="items" style="display: inline; margin-right: 7%;">
-              <input type="checkbox" class="form-check-input" id="itemVegetables" onclick='buildList("Vegetables")'> Vegetables
-            </div> <br>
-            <div class="items" style="display: inline; margin-right: 7%;">
-              <input type="checkbox" class="form-check-input" id="itemGrains" onclick='buildList("Grains and Pulses")'> Grains and Pulses
-            </div>
-            <div class="items" style="display: inline; margin-right: 7%;">
-              <input type="checkbox" class="form-check-input" id="itemToiletries" onclick='buildList("Toiletries")'> Toiletries
-            </div>
-            <br>
-            <div class="items" style="display: inline; margin-right: 7%;">
-              <input type="checkbox" class="form-check-input" id="itemMedicines" onclick='buildList("Medicines")'> Medicines
-            </div>
-            <div class="items" style="display: inline; margin-right: 7%;">
-              <input type="checkbox" class="form-check-input" id="itemWater" onclick='buildList("Water Supplies")'> Water Supplies
-            </div><br>
-            <div class="items" style="display: inline; margin-right: 7%;">
-              <input type="checkbox" class="form-check-input" id="itemPet" onclick='buildList("Pet Supplies")'> Pet Supplies
-            </div>
+              <div id="itemSelling">
+                <div class="items" style="display: inline; margin-right: 7%;">
+                  <label for="itemSelling">Items available:</label>
+                </div><br>
+                <div class="items" style="display: inline; margin-right: 7%;">
+                  <input type="checkbox" class="form-check-input" id="itemGrocery" onclick='buildList("Groceries")'> Groceries
+                </div>
+                <div class="items" style="display: inline; margin-right: 7%;">
+                  <input type="checkbox" class="form-check-input" id="itemVegetables" onclick='buildList("Vegetables")'> Vegetables
+                </div> <br>
+                <div class="items" style="display: inline; margin-right: 7%;">
+                  <input type="checkbox" class="form-check-input" id="itemGrains" onclick='buildList("Grains and Pulses")'> Grains and Pulses
+                </div>
+                <div class="items" style="display: inline; margin-right: 7%;">
+                  <input type="checkbox" class="form-check-input" id="itemToiletries" onclick='buildList("Toiletries")'> Toiletries
+                </div>
+                <br>
+                <div class="items" style="display: inline; margin-right: 7%;">
+                  <input type="checkbox" class="form-check-input" id="itemMedicines" onclick='buildList("Medicines")'> Medicines
+                </div>
+                <div class="items" style="display: inline; margin-right: 7%;">
+                  <input type="checkbox" class="form-check-input" id="itemWater" onclick='buildList("Water Supplies")'> Water Supplies
+                </div><br>
+                <div class="items" style="display: inline; margin-right: 7%;">
+                  <input type="checkbox" class="form-check-input" id="itemPet" onclick='buildList("Pet Supplies")'> Pet Supplies
+                </div>
+              </div>
+              <div class="items" style="display: inline; margin-right: 7%;">
+                <br>
+                Are you willing to provide home delivery?
+                <div style=""><input type="radio" name="radio" class="form-check-input" id="delivery" value="Yes"> Yes </div>
+                <div><input type="radio" name="radio" class="form-check-input" id="delivery" value="No"> No </div>
+              </div>
           </div>
-          <div class="items" style="display: inline; margin-right: 7%;">
-            <br>
-            Are you willing to provide home delivery?
-            <div style=""><input type="radio" name="radio" class="form-check-input" id="delivery" value="Yes"> Yes </div>
-            <div><input type="radio" name="radio" class="form-check-input" id="delivery" value="No"> No </div>
-          </div>
-        </div>
-        <input type="text" id="items" name="items" hidden>
-        <% if(valid) { %>
-        <button class="btn btn-lg btn-primary btn-block text-uppercase" style="margin-top: 20px;">Submit</button>
-        <br>
-        <% } else {%>
-        <%if(alert==1) {%>
-        <p style="color: red;">Please verify your mobile number by OTP</p>
-        <%}%>
+          <input type="text" id="items" name="items" hidden>
+          <% if(valid) { %>
+          <button class="btn btn-lg btn-primary btn-block text-uppercase" style="margin-top: 20px;">Submit</button>
+          <br>
+          <% } else {%>
+          <%if(alert==1) {%>
+          <p style="color: red;">Please verify your mobile number by OTP</p>
+          <%}%>
           <button class="btn btn-lg btn-primary btn-block text-uppercase" style="margin-top: 20px;" disabled>Submit</button>
           <%}%>
-        </form>
+          </form>
+        </div>
       </div>
-    </div>
     </div>
     </div>
   </header>
@@ -160,6 +157,9 @@
               <div class="form-label-group col-md-8">
                 <input type="text" id="otp" class="form-control" placeholder="Enter 6-digit OTP" name="otp" required autofocus>
               </div>
+              <%if(alert=="Incorrect OTP"){%>
+              <p class="alert alert-danger"><%=alert%></p>
+              <%}%>
               <div class="col-md-4">
                 <button class="btn btn-primary">Verify</button>
               </div>
@@ -178,9 +178,14 @@
     <script src="assets/js/google-address-autocomplete.min.js"></script>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+
+    <%if(valid==false) {%>
+              <script type="text/javascript">
+                $('#otpModal').modal('show');
+              </script>
+              <%}%>
     <script>
       function sendOTP() {
-        $('#otpModal').modal('show');
         let details = {
           locality: document.getElementById('autocomplete').value,
           placeid: document.getElementById('resultid').value,
@@ -193,8 +198,6 @@
         document.getElementById('phoneNumber').value = document.getElementById('storeContact').value
         document.getElementById('otp-button').click();
       }
-
-
       var placeid = ""
       var items = []
 
