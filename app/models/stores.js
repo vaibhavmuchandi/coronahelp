@@ -8,6 +8,8 @@ var storeSchema = mongoose.Schema({
   storeOpenTime: String,
   storeCloseTime: String,
   storeFullAddress: String,
+  storeOpenTime: String,
+  storeCloseTime: String,
   storeLandmark: String,
   storeItems: String,
   storeDelivery: String,
