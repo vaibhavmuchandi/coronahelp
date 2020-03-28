@@ -143,7 +143,7 @@ module.exports = (app, passport) => {
       storeContact: storeContact,
       storeFullAddress: storeAddress,
       storeOpenTime: storeOpenTime,
-      storeCloseTIme: storeCloseTime,
+      storeCloseTime: storeCloseTime,
       storeLandmark: storeLandmark,
       storeItems: itemsAvailable,
       storeDelivery: storeDelivery,
