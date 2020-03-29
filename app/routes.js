@@ -216,6 +216,10 @@ module.exports = (app, passport) => {
     });
   });
 
+  app.get('/order-online', (req, res) => {
+    res.render('order-online');
+  })
+
   app.get('/vegetable-vans-belgaum', (req, res) => {
     res.render('vegetable-vans');
   })
