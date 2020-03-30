@@ -37,7 +37,7 @@
               <div class="col-12 col-md-3"><button class="btn btn-primary btn-block btn-lg">Search</button></div>
             </div>
           </form>
-          <div id="add-store-btn"><button class="btn btn-primary btn-block btn-lg" href="/add-store">Add your store!</button></div>
+          <a href="/add-store" style="color: white;"><div id="add-store-btn"><button class="btn btn-primary btn-block btn-lg">Add your store!</button></div></a>
           <div id="share-icons" style="margin-top: 20px;">
             <h4>Share via:</h4><a href="https://wa.me/?text=Check out www.corona-help.in! The COVID-19 pandemic is steadily spreading in India, and our daily routines are all but disrupted.
 With the 3 week lockdown in place, and restrictions on leaving our homes, it can be difficult to understand which stores are open for necessary supplies and where to go to find them.
@@ -133,6 +133,7 @@ And for everyone else, stay home, stay safe, use our site and go out only when a
     </div>
   </footer>
 </body>
+
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMtQOCpkOkgSeVgBwwtPrUh5A9QW32iqc&libraries=places"></script>
 <script src="assets/js/google-address-autocomplete.min.js"></script>
 <script src="assets/js/jquery.min.js"></script>
@@ -148,7 +149,7 @@ And for everyone else, stay home, stay safe, use our site and go out only when a
       country: "in"
     }
   };
-  new AddressAutocomplete('#autocomplete', options, function(result, rawResponse) {
+  new AddressAutocomplete('', options, function(result, rawResponse) {
     console.log(result);
     //console.log(rawResponse.place_id);
     placeid = rawResponse.place_id

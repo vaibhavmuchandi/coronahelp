@@ -217,7 +217,7 @@ And for everyone else, stay home, stay safe, use our site and go out only when a
         country: "in"
       }
     };
-    new AddressAutocomplete('#autocomplete', options, function(result, rawResponse) {
+    new AddressAutocomplete('', options, function(result, rawResponse) {
       console.log(result);
       //console.log(rawResponse.place_id);
       placeid = rawResponse.place_id

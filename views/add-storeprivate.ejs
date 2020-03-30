@@ -117,7 +117,7 @@
           <%if(alert==1) {%>
           <p style="color: red;">Please verify your mobile number by OTP</p>
           <%}%>
-          <button class="btn btn-lg btn-primary btn-block text-uppercase" style="margin-top: 20px;" disabled>Submit</button>
+          <button class="btn btn-lg btn-primary btn-block text-uppercase" style="margin-top: 20px;">Submit</button>
           <%}%>
           </form>
         </div>
@@ -229,7 +229,7 @@
           country: "in"
         }
       };
-      new AddressAutocomplete('', options, function(result, rawResponse) {
+      new AddressAutocomplete('#autocomplete', options, function(result, rawResponse) {
         console.log(result);
         //console.log(rawResponse.place_id);
         placeid = rawResponse.place_id
