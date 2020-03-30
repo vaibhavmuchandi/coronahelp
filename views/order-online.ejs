@@ -1,187 +1,193 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Add Store</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/styles.css">
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic">
-    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
-  </head>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <title>Add Store</title>
+  <link rel="stylesheet" href="assets/bootstrap/css/styles.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic">
+  <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+</head>
 
-  <body>
-    <nav class="navbar navbar-light navbar-expand bg-light navigation-clean">
-      <div class="container"><a class="navbar-brand" href="/">CoronaHelp</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1">
-        </button>
-        <a class="btn btn-primary ml-auto" role="button" href="/add-store">Add your store!</a>
-      </div>
-    </nav>
+<body>
+  <nav class="navbar navbar-light navbar-expand bg-light navigation-clean">
+    <div class="container"><a class="navbar-brand" href="/">CoronaHelp</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1">
+      </button>
+      <a class="btn btn-primary ml-auto" role="button" href="/add-store">Add your store!</a>
+    </div>
+  </nav>
 
-    <header class="masthead text-black text-center" style="background:url('assets/img/bg-masthead.jpg')no-repeat center center;background-size:cover;">
-      <div class="row">
-        <div class="col-sm-4 col-md-3 col-lg-4 mx-auto">
-          <div class="card card-signin my-4">
-            <div class="card-body">
-              <h5 class="card-title text-center">Enter details:</h5>
-              <form action="/order-online" method="POST" class="form-signin">
-                <div class="form-label-group">
-                  <input type="text" id="customer-name" class="form-control" placeholder="name" name="customerName" required autofocus>
-                  <label for="customer-name">Name</label>
-                </div>
-                <div class="form-label-group">
-                  <input type="text" id="customer-contact" class="form-control" placeholder="Contact Number" name="customerContact" required autofocus>
-                  <label for="customer-contact">Contact Number</label>
-                </div>
-                <div class="form-label-group">
-                  <input type="text" id="customer-email" class="form-control" placeholder="Email Address" name="customerEmail" autofocus>
-                  <label for="customer-email">Email Address</label>
-                </div>
-                <input type="text" name="items" id="items" hidden>
-              </form>
-              <br>
-              <div class="shopping-list">
-                <h5 class="card-title text-center">Build Your List</h5>
-                <div class="form-label-group">
-                  <input type="text" id="list-item" class="form-control" placeholder="Add item" required autofocus>
-                  <label for="list-item">Item</label>
-                </div>
-                <div class="form-row">
-                  <div class="col-lg-2"></div>
-                  <div class="form-group col-3 col-lg-2">
-                    <label for="quantity">Quantity</label><br>
-                    <input type="number" id="quantity" class="form-control text-center" placeholder="Quantity" min="0.5" max="5" step="0.5" value="0" required autofocus>
-                  </div>
-                  <div class="col-3 col-lg-2">
-                    <label style="color:white;">Unit</label>
-                    <button class="btn btn-secondary" onclick="handleClick(this)" value="units">units</button>
-                  </div>
-                  <div class="col-3 col-lg-2">
-                    <label>Unit</label>
-                    <button class="btn btn-secondary" onclick="handleClick(this)" value="kg">kg</button>
-                  </div>
-                  <div class="col-3 col-lg-2">
-                    <label style="color:white;">Unit</label>
-                    <button class="btn btn-secondary" onclick="handleClick(this)" value="L">litre</button>
-                  </div>
-                </div>
-                <button id="add-to-list" class="btn btn-primary" onclick="buildList()">Add item</button>
+  <header class="masthead text-black text-center" style="background:url('assets/img/bg-masthead.jpg')no-repeat center center;background-size:cover;">
+    <div class="row">
+      <div class="col-sm-4 col-md-3 col-lg-4 mx-auto">
+        <div class="card card-signin my-4">
+          <div class="card-body">
+            <h5 class="card-title text-center">Enter details:</h5>
+            <form action="/order-online" method="POST" class="form-signin">
+              <div class="form-label-group">
+                <input type="text" id="customer-name" class="form-control" placeholder="name" name="customerName" required autofocus>
+                <label for="customer-name">Name</label>
               </div>
+              <div class="form-label-group">
+                <input type="text" id="customer-contact" class="form-control" placeholder="Contact Number" name="customerContact" required autofocus>
+                <label for="customer-contact">Contact Number</label>
+              </div>
+              <div class="form-label-group">
+                <input type="text" id="customer-email" class="form-control" placeholder="Email Address" name="customerEmail" autofocus>
+                <label for="customer-email">Email Address</label>
+              </div>
+              <input type="text" name="items" id="items" hidden>
+            </form>
+            <br>
+            <div class="shopping-list">
+              <h5 class="card-title text-center">Build Your List</h5>
+              <div class="form-label-group">
+                <input type="text" id="list-item" class="form-control" placeholder="Add item" required autofocus>
+                <label for="list-item">Item</label>
+              </div>
+              <div class="form-row">
+                <div class="col-lg-2"></div>
+                <div class="form-group col-3 col-lg-2">
+                  <label for="quantity">Quantity</label><br>
+                  <input type="number" id="quantity" class="form-control text-center" placeholder="Quantity" min="0.5" max="5" step="0.5" value="0" required autofocus>
+                </div>
+                <div class="col-3 col-lg-2">
+                  <label style="color:white;">Unit</label>
+                  <button class="btn btn-secondary" onclick="handleClick(this)" value="units">units</button>
+                </div>
+                <div class="col-3 col-lg-2">
+                  <label>Unit</label>
+                  <button class="btn btn-secondary" onclick="handleClick(this)" value="kg">kg</button>
+                </div>
+                <div class="col-3 col-lg-2">
+                  <label style="color:white;">Unit</label>
+                  <button class="btn btn-secondary" onclick="handleClick(this)" value="L">litre</button>
+                </div>
+              </div>
+              <button id="add-to-list" class="btn btn-primary" onclick="buildList()">Add item</button>
             </div>
           </div>
         </div>
       </div>
+    </div>
 
+    <div class="row">
+      <div class="col-sm-4 col-md-3 col-lg-4 mx-auto">
+        <div class="card card-signin my-4">
+          <div class="card-body">
+            <h5 class="card-title text-center">Your List</h5>
+            <table class="table table-sm">
+              <thead>
+                <tr>
+                  <th scope="col">Item</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+  <footer class="footer bg-light">
+    <p class="text-muted small mb-4 mb-lg-0" style="text-align: center;">Made with ♥ by Vaibhav Muchandi and Varun Shiri</p>
+    <div class="container">
       <div class="row">
-        <div class="col-sm-4 col-md-3 col-lg-4 mx-auto">
-          <div class="card card-signin my-4">
-            <div class="card-body">
-              <h5 class="card-title text-center">Your List</h5>
-              <table class="table table-sm">
-                <thead>
-                  <tr>
-                    <th scope="col">Item</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                </tbody>
-              </table>
-            </div>
-          </div>
+        <div class="col-lg-6 my-auto h-100 text-center text-lg-left">
+          <ul class="list-inline mb-2">
+            <li class="list-inline-item"><a href="/">Home</a></li>
+            <li class="list-inline-item"><span>⋅</span></li>
+            <li class="list-inline-item"><a href="/add-store">Add your store</a></li>
+            <li class="list-inline-item"><span>⋅</span></li>
+            <li class="list-inline-item"><a href="/list-stores">Search stores</a></li>
+            <li class="list-inline-item"><span>⋅</span></li>
+            <li class="list-inline-item"><a href="https://wa.me/918105937586">Contact</a></li>
+          </ul>
+          <p class="text-muted small mb-4 mb-lg-0">© CoronaFight 2020. All Rights Reserved.</p>
+        </div>
+        <div class="col-lg-6 my-auto h-100 text-center text-lg-right">
+          <ul class="list-inline mb-0">
+            <li class="list-inline-item"><a href="https://www.facebook.com/vaibhavmuchandii"><i class="fab fa-facebook fa-2x fa-fw"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.twitter.com/vaibhavmuchandi"><i class="fab fa-twitter fa-2x fa-fw"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.instagram.com/vaibhav.muchandi"><i class="fab fa-instagram fa-2x fa-fw"></i></a></li>
+            <li class="list-inline-item"><a href="https://wa.me/918105937586"><i class="fab fa-whatsapp fa-2x fa-fw"></i></a></li>
+          </ul>
         </div>
       </div>
-    </header>
-
-
-    <footer class="footer bg-light">
-      <p class="text-muted small mb-4 mb-lg-0" style="text-align: center;">Made with ♥ by Vaibhav Muchandi and Varun Shiri</p>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6 my-auto h-100 text-center text-lg-left">
-            <ul class="list-inline mb-2">
-              <li class="list-inline-item"><a href="/">Home</a></li>
-              <li class="list-inline-item"><span>⋅</span></li>
-              <li class="list-inline-item"><a href="/add-store">Add your store</a></li>
-              <li class="list-inline-item"><span>⋅</span></li>
-              <li class="list-inline-item"><a href="/list-stores">Search stores</a></li>
-              <li class="list-inline-item"><span>⋅</span></li>
-              <li class="list-inline-item"><a href="https://wa.me/918105937586">Contact</a></li>
-            </ul>
-            <p class="text-muted small mb-4 mb-lg-0">© CoronaFight 2020. All Rights Reserved.</p>
-          </div>
-          <div class="col-lg-6 my-auto h-100 text-center text-lg-right">
-            <ul class="list-inline mb-0">
-              <li class="list-inline-item"><a href="https://www.facebook.com/vaibhavmuchandii"><i class="fab fa-facebook fa-2x fa-fw"></i></a></li>
-              <li class="list-inline-item"><a href="https://www.twitter.com/vaibhavmuchandi"><i class="fab fa-twitter fa-2x fa-fw"></i></a></li>
-              <li class="list-inline-item"><a href="https://www.instagram.com/vaibhav.muchandi"><i class="fab fa-instagram fa-2x fa-fw"></i></a></li>
-              <li class="list-inline-item"><a href="https://wa.me/918105937586"><i class="fab fa-whatsapp fa-2x fa-fw"></i></a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </footer>
+    </div>
+  </footer>
 
 
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMtQOCpkOkgSeVgBwwtPrUh5A9QW32iqc&libraries=places"></script>
-    <script src="assets/js/google-address-autocomplete.min.js"></script>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMtQOCpkOkgSeVgBwwtPrUh5A9QW32iqc&libraries=places"></script>
+  <script src="assets/js/google-address-autocomplete.min.js"></script>
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('[data-toggle="popover"]').popover();
+    });
+  </script>
+  <script>
+    var placeid = ""
+    var items = [];
+    var i = 0;
+    var unit = '';
 
-    <script>
-      var placeid = ""
-      var items = [];
-      var i = 0;
-      var unit = '';
-
-      function set() {
-        document.getElementById('resultid').value = placeid;
+    function set() {
+      document.getElementById('resultid').value = placeid;
+    }
+    const options = {
+      componentRestrictions: {
+        country: "in"
       }
-      const options = {
-        componentRestrictions: {
-          country: "in"
-        }
-      };
-      new AddressAutocomplete('#autocomplete', options, function(result, rawResponse) {
-        console.log(result);
-        placeid = rawResponse.place_id
-        set()
-      });
+    };
+    new AddressAutocomplete('#autocomplete', options, function(result, rawResponse) {
+      console.log(result);
+      placeid = rawResponse.place_id
+      set()
+    });
 
-      function handleClick(el) {
-        unit = el.value;
-        let active = document.querySelector('.active')
-        if (active) {
-          $(active).removeClass('active btn-primary');
-          $(active).addClass('btn-secondary');
-        }
-        $(el).removeClass('btn-secondary')
-        $(el).addClass('active btn-primary');
+    function handleClick(el) {
+      unit = el.value;
+      let active = document.querySelector('.active')
+      if (active) {
+        $(active).removeClass('active btn-primary');
+        $(active).addClass('btn-secondary');
       }
+      $(el).removeClass('btn-secondary')
+      $(el).addClass('active btn-primary');
+    }
 
-      function buildList() {
-        i++;
-        let item = document.getElementById('list-item').value;
-        let qty = document.getElementById('quantity').value + ' ' + unit;
-        items.push([...item, quantity])
-        $('.table').find('tbody').append(`<tr id="${i-1}"><td>${item}</td><td>${qty}</td><td><i class="delete fas fa-trash-alt" onclick="deleteFromList(${i-1})"></i></td></tr>`)
-        document.getElementById('items').value = items;
+    function buildList() {
+      i++;
+      let item = document.getElementById('list-item').value;
+      let qty = document.getElementById('quantity').value + ' ' + unit;
+      items.push([...item, quantity])
+      $('.table').find('tbody').append(
+        `<tr id="${i-1}"><td>${item}</td><td>${qty}</td><td><i class="fa fa-trash-alt" data-toggle="popover" data-trigger="hover" data-content="Some content" onclick="deleteFromList(${i-1})"></i></td></tr>`
+      )
+      document.getElementById('items').value = items;
 
-        document.getElementById('list-item').value = '';
-        document.getElementById('quantity').value = 0;
-      }
+      document.getElementById('list-item').value = '';
+      document.getElementById('quantity').value = 0;
+    }
 
-      function deleteFromList(item) {
-        items.splice(item, 1);
-        $(`#${item}`).remove();
-        i--;
-      }
-    </script>
-  </body>
+    function deleteFromList(item) {
+      items.splice(item, 1);
+      $(`#${item}`).remove();
+      i--;
+    }
+  </script>
+</body>
 
 
 
