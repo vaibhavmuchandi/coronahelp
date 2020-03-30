@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic">
   <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
 </head>
 
@@ -193,35 +194,48 @@ And for everyone else, stay home, stay safe, use our site and go out only when a
         </div>
       </div>
     </footer>
-  </body>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMtQOCpkOkgSeVgBwwtPrUh5A9QW32iqc&libraries=places"></script>
-  <script src="assets/js/google-address-autocomplete.min.js"></script>
-  <script src="assets/js/jquery.min.js"></script>
-  <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-  <script>
-    let filters = []
-    function applyFilter(filter) {
-      let index = filters.indexOf(filter);
-      if(index!=-1)
-        filters.splice(index, 1)
-      else
-        filters.push(filter)
-      document.getElementById('filters').value = filters
-    }
-    var placeid = ""
-    function set() {
-      document.getElementById('resultid').value = placeid;
-    }
-    const options = {
-      componentRestrictions: {
-        country: "in"
-      }
-    };
-    new AddressAutocomplete('#autocomplete', options, function(result, rawResponse) {
-      console.log(result);
-      //console.log(rawResponse.place_id);
-      placeid = rawResponse.place_id
-      set()
+      <input type="text" id="areas" value="<%=JSON.stringify(areas)%>" hidden>
+</body>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMtQOCpkOkgSeVgBwwtPrUh5A9QW32iqc&libraries=places"></script>
+<script src="assets/js/google-address-autocomplete.min.js"></script>
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+  $(function() {
+    var availableTags = JSON.parse(document.getElementById('areas').value);
+    $("#autocomplete").autocomplete({
+      source: availableTags
     });
-  </script>
+  });
+</script>
+<script>
+  let filters = []
+
+  function applyFilter(filter) {
+    let index = filters.indexOf(filter);
+    if (index != -1)
+      filters.splice(index, 1)
+    else
+      filters.push(filter)
+    document.getElementById('filters').value = filters
+  }
+  var placeid = ""
+
+  function set() {
+    document.getElementById('resultid').value = null;
+  }
+  // const options = {
+  //   componentRestrictions: {
+  //     country: "in"
+  //   }
+  // };
+  // new AddressAutocomplete('#autocomplete', options, function(result, rawResponse) {
+  //   console.log(result);
+  //   //console.log(rawResponse.place_id);
+  //   placeid = rawResponse.place_id
+  //   set()
+  // });
+</script>
+
 </html>

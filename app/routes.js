@@ -4,19 +4,22 @@ module.exports = (app, passport) => {
   app.get('/', (req, res) => {
     let cities = new Set();
     Store.distinct('storeArea', (err, areas) => {
-      areas.forEach((area) => {
-        let parts = area.split(',')
+      app.set('areas', areas);
+      areas.forEach((areas) => {
+        let parts = areas.split(',');
         let length = parts.length;
         if (length >= 3)
           cities.add(parts[length - 3].trim() + ',' + parts[length - 2]);
       })
       res.render('index', {
-        cities: [...cities].sort()
+        cities: [...cities].sort(),
+        areas: areas
       })
     })
   })
 
   app.get('/list-stores', (req, res) => {
+    res.locals.areas = app.get('areas') || [];
     res.render('list', {
       stores: [],
       message: 'Enter a location to search for stores'
@@ -26,6 +29,7 @@ module.exports = (app, passport) => {
 
   app.post('/list-stores', (req, res) => {
     let placeid = req.body.resultid;
+    res.locals.areas = app.get('areas') || [];
     let area = req.body.autocomplete;
     area = area.replace(/belagavi/ig, 'Belgaum');
     res.locals.filters = null;
@@ -64,6 +68,7 @@ module.exports = (app, passport) => {
   app.get('/apply-filters', (req, res) => {
     let stores = app.get('stores');
     res.locals.filters = null;
+    res.locals.areas = app.get('areas') || [];
     if (!stores) {
       res.render('list', {
         stores: [],
@@ -80,6 +85,7 @@ module.exports = (app, passport) => {
   app.post('/apply-filters', (req, res) => {
     let filters = req.body.filters.split(',');
     res.locals.filters = filters.join(', ');
+    res.locals.areas = app.get('areas') || [];
     let stores = app.get('stores');
     let message = null;
     let results = [];
@@ -222,15 +228,19 @@ module.exports = (app, passport) => {
 
   app.use((req, res, next) => {
     res.status(502);
+    let areas = app.get('areas') || [];
     res.render('index', {
-      cities: []
+      cities: [],
+      areas: areas
     })
   })
 
   app.use((req, res, next) => {
     res.status(404);
+    let areas = app.get('areas') || [];
     res.render('index', {
-      cities: []
+      cities: [],
+      areas: areas
     })
   })
 }
