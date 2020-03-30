@@ -33,6 +33,7 @@ module.exports = (app, passport) => {
     let area = req.body.autocomplete;
     area = area.replace(/belagavi/ig, 'Belgaum');
     area = area.replace(/bangalore/ig, 'Bengaluru');
+    area = area.replace(/belgaum district/ig, 'Belgaum');
     res.locals.filters = null;
     Store.find({
         $or: [{
@@ -129,14 +130,15 @@ module.exports = (app, passport) => {
       alert: 1
     })
   })
-  
+
 
   app.post('/add-store', (req, res) => {
     storeName = req.body.storeName;
     storeArea = req.body.autocomplete;
     storeArea = storeArea.replace(/belagavi/ig, 'Belgaum');
+    storeArea = storeArea.replace(/belgaum district/ig, 'Belgaum');
     storeLocality = "abcd",
-    storeContact = req.body.storeContact;
+      storeContact = req.body.storeContact;
     storeAddress = req.body.storeAddress;
     storeOpenTime = req.body.storeOpenTime;
     storeCloseTime = req.body.storeCloseTime;
