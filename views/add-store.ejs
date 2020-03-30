@@ -9,8 +9,7 @@
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic">
   <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
-  <!--   <script src="../../node_modules/google-address-autocomplete/dist/google-address-autocomplete.min.js"></script>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMtQOCpkOkgSeVgBwwtPrUh5A9QW32iqc&libraries=places"></script>-->
+  <!-- <link rel="stylesheet" href="https://rawgit.com/bassjobsen/typeahead.js-bootstrap-css/master/typeaheadjs.css" /> -->
 </head>
 
 <body>
@@ -28,9 +27,9 @@
           <div class="card-body">
             <h5 class="card-title text-center">Enter your store details</h5>
             <form action="/add-store" method="POST" class="form-signin">
-              <div class="form-label-group">
-                <input type="text" id="autocomplete" class="form-control" placeholder="Locality" name="autocomplete" value="<%=details.locality%>" required autofocus>
-                <label for="autocomplete">Locality</label>
+              <div class="form-group">
+                <label for="inpAddress">Enter store area</label>
+                <input type="text" id="inpAddress" class="form-control" placeholder="Store Area" name="autocomplete" autocomplete="off" value="<%=details.locality%>" required autofocus>
               </div>
               <input type="text" id="resultid" name="resultid" value="<%=details.placeid%>" hidden>
               <div class="form-label-group">
@@ -184,12 +183,12 @@
       </div>
     </div>
 
-
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMtQOCpkOkgSeVgBwwtPrUh5A9QW32iqc&libraries=places"></script>
-    <script src="assets/js/google-address-autocomplete.min.js"></script>
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMtQOCpkOkgSeVgBwwtPrUh5A9QW32iqc&libraries=places"></script>
+    <script src="assets/js/google-address-autocomplete.min.js"></script> -->
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://rawgit.com/corejavascript/typeahead.js/master/dist/typeahead.bundle.js"></script>
+    <script src="https://rawgit.com/komoot/typeahead-address-photon/master/src/typeahead-address-photon.js"></script>
 
     <%if(valid==false) {%>
               <script type="text/javascript">
@@ -210,30 +209,66 @@
         document.getElementById('phoneNumber').value = document.getElementById('storeContact').value
         document.getElementById('otp-button').click();
       }
-      var placeid = ""
-      var items = []
 
-      function set() {
-        document.getElementById('resultid').value = placeid;
-      }
-      const options = {
-        componentRestrictions: {
-          country: "in"
+
+      function formatResult(predictions) {
+        let bbox = [68.1113787, 35.6745457, 97.395561, 6.2325274];
+        let name = predictions.properties.name;
+        let city = predictions.properties.city || '';
+        let state = predictions.properties.state || '';
+        let country = predictions.properties.country || '';
+        let lon = predictions.geometry.coordinates[0];
+        let lat = predictions.geometry.coordinates[1];
+
+        if (lon > bbox[0] && lon < bbox[2] && lat < bbox[1] && lat > bbox[3]) {
+          if (city != '')
+            return `${name}, ${city}, ${state}, ${country}`;
+          else if (state != '')
+            return `${name}, ${state}, ${country}`;
+          else if (country != '')
+            return `${name}, ${country}`;
+          return `${name}`;
         }
-      };
-      new AddressAutocomplete('#autocomplete', options, function(result, rawResponse) {
-        console.log(result);
-        //console.log(rawResponse.place_id);
-        placeid = rawResponse.place_id
-        set()
+      }
+
+      var engine = new PhotonAddressEngine({
+        url: 'https://photon.komoot.de/',
+        lon: 74.0543908,
+        lat: 18.4767308,
+        formatResult: formatResult
       });
 
-      function buildList(item) {
-        items.push(item)
-        console.log(items)
-        document.getElementById('items').value = items
-      }
-    </script>
+      // function showSelected(event, selected) {
+      //   $('#autocomplete').val(selected.description);
+      // }
+
+      $('#inpAddress').typeahead({
+        hint: true,
+        highlight: true,
+        minLength: 3
+      }, {
+        source: engine.ttAdapter(),
+        displayKey: 'description'
+      });
+
+      engine.bindDefaultTypeaheadEvent($('#inpAddress'));
+      //$(engine).bind('addresspicker:selected', showSelected);
+
+
+
+    //   const options = {
+    //     componentRestrictions: {
+    //       country: "in"
+    //     }
+    //   };
+    //   new AddressAutocomplete('#autocomplete', options, function(result, rawResponse) {
+    //     console.log(result);
+    //     //console.log(rawResponse.place_id);
+    //     placeid = rawResponse.place_id
+    //     set()
+    //   });
+    //
+  </script>
 </body>
 
 

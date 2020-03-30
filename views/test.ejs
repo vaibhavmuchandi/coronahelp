@@ -65,16 +65,34 @@ function showPredictions(event, predictions) {
   // });
 }
 
+function formatResult(predictions) {
+  let bbox = [68.1113787, 35.6745457, 97.395561, 6.2325274];
+  let name = predictions.properties.name;
+  let city = predictions.properties.city || '';
+  let state = predictions.properties.state || '';
+  let country = predictions.properties.country || '';
+  let lon = predictions.geometry.coordinates[0];
+  let lat = predictions.geometry.coordinates[1];
+
+  if (lon > bbox[0] && lon < bbox[2] && lat < bbox[1] && lat > bbox[3]) {
+    if (city != '')
+      return `${name}, ${city}, ${state}, ${country}`;
+    else if (state != '')
+      return `${name}, ${state}, ${country}`;
+    else if (country != '')
+      return `${name}, ${country}`;
+    return `${name}`;
+  }
+}
+
 var engine = new PhotonAddressEngine({
   url: 'https://photon.komoot.de/',
   lon: 74.0543908,
-  lat: 18.4767308
+  lat: 18.4767308,
+  formatResult: formatResult
 });
 
 function showSelected(event, selected) {
-  let name = selected.properties.name;
-  let city = selected.properties.city || '';
-  let state = selected.properties
   $('#inpAddress').val();
   console.log(selected);
   // map.removeLayer(markers);
