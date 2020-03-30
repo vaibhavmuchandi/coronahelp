@@ -4,11 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "deploy": "gcloud app deploy",
-    "lint": "samples lint",
-    "pretest": "npm run lint",
-    "test": "ava --verbose test/*.test.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "bcrypt": "^4.0.1",
@@ -29,9 +25,6 @@
     "request": "^2.88.2"
   },
   "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "",
   "license": "ISC"
 }
