@@ -4,13 +4,14 @@ module.exports = (app, passport) => {
   app.get('/', (req, res) => {
     let cities = new Set();
     Store.distinct('storeArea', (err, areas) => {
-      app.set('areas', areas);
       areas.forEach((areas) => {
         let parts = areas.split(',');
         let length = parts.length;
         if (length >= 3)
           cities.add(parts[length - 3].trim() + ',' + parts[length - 2]);
       })
+      areas = [...areas, 'Belagavi, Karnataka, India', 'Bangalore, Karnataka, India', 'Jamakhandi, Karnataka, India'];
+      app.set('areas', areas);
       res.render('index', {
         cities: [...cities].sort(),
         areas: areas
@@ -34,16 +35,13 @@ module.exports = (app, passport) => {
     area = area.replace(/belagavi/ig, 'Belgaum');
     area = area.replace(/bangalore/ig, 'Bengaluru');
     area = area.replace(/belgaum district/ig, 'Belgaum');
+    area = area.replace(/jamakhandi/ig, 'Jamkhandi');
     res.locals.filters = null;
     Store.find({
-        $or: [{
-          storeLocation: placeid
-        }, {
-          storeArea: {
-            $regex: area,
-            $options: 'i'
-          }
-        }]
+        storeArea: {
+          $regex: area,
+          $options: 'i'
+        }
       })
       .sort({
         storeName: 1
@@ -66,6 +64,7 @@ module.exports = (app, passport) => {
 
       })
   })
+
 
   app.get('/apply-filters', (req, res) => {
     let stores = app.get('stores');
@@ -137,8 +136,10 @@ module.exports = (app, passport) => {
     storeArea = req.body.autocomplete;
     storeArea = storeArea.replace(/belagavi/ig, 'Belgaum');
     storeArea = storeArea.replace(/belgaum district/ig, 'Belgaum');
-    storeLocality = "abcd",
-      storeContact = req.body.storeContact;
+    storeArea = storeArea.replace(/bangalore/ig, 'Bengaluru');
+    storeArea = storeArea.replace(/jamakhandi/ig, 'Jamkhandi');
+    storeLocality = "abcd";
+    storeContact = req.body.storeContact;
     storeAddress = req.body.storeAddress;
     storeOpenTime = req.body.storeOpenTime;
     storeCloseTime = req.body.storeCloseTime;
