@@ -396,3 +396,7 @@ span.twitter-typeahead {
 #inpAddress {
   border-radius: 25px;
 }
+
+.fa-times-circle {
+  color: red;
+}

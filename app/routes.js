@@ -227,8 +227,15 @@ module.exports = (app, passport) => {
     res.render('order-online');
   })
 
+  app.get('/orders', (req, res) => {
+    res.render('orders');
+  })
   app.get('/vegetable-vans-belgaum', (req, res) => {
     res.render('vegetable-vans');
+  })
+
+  app.get('/order-confirm', (req, res) => {
+    res.render('order-confirm');
   })
 
   app.use((req, res, next) => {
