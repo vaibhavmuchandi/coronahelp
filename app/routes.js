@@ -1,6 +1,7 @@
 module.exports = (app, passport) => {
   let request = require('request');
   let Store = require('../app/models/stores');
+  let Order = require('../app/models/online-order')
   app.get('/', (req, res) => {
     let cities = new Set();
     Store.distinct('storeArea', (err, areas) => {
@@ -227,15 +228,46 @@ module.exports = (app, passport) => {
     res.render('order-online');
   })
 
-  app.get('/orders', (req, res) => {
-    res.render('orders');
-  })
+  app.post('/place-order', (req, res) => {
+    function makeid(length) {
+      var result = '';
+      var characters = '123456789';
+      var charactersLength = characters.length;
+      for (var i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      }
+      return result;
+    }
+    var id = makeid(4);
+    var items = req.body.items;
+    var item = JSON.parse(items);
+    var name = req.body.submitName;
+    var contact = req.body.submitContact;
+    var address = req.body.submitAddress;
+    var newOrder = {
+      orderNumber: id,
+      customerName: name,
+      customerContact: contact,
+      customerAddress: address,
+      finalItems: item
+    }
+    Order.create(newOrder, (err, submittedOrder) => {
+      if (err) {
+        res.send(err)
+      } else {
+        res.render('order-confirm', {
+          orderNo: id,
+          name: name,
+          contact: contact,
+          address: address,
+          order: item
+        })
+      }
+    })
+  });
+
   app.get('/vegetable-vans-belgaum', (req, res) => {
     res.render('vegetable-vans');
-  })
-
-  app.get('/order-confirm', (req, res) => {
-    res.render('order-confirm');
   })
 
   app.use((req, res, next) => {
