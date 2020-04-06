@@ -18,7 +18,12 @@
   <nav class="navbar navbar-light navbar-expand bg-light navigation-clean">
     <div class="container"><a class="navbar-brand" href="/">CoronaHelp</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1">
       </button>
-      <a class="btn btn-primary ml-auto" role="button" href="/add-store">Add your store!</a>
+      <div class="ml-auto">
+        <a style="margin:5px 10px 0 0; float:left;" class="nav-link" target="_blank" href="https://www.mohfw.gov.in/pdf/coronvavirushelplinenumber.pdf">
+          <h6>HELPLINES</h6>
+        </a>
+        <a class="btn btn-primary" role="button" href="/add-store">Add your store!</a>
+      </div>
     </div>
   </nav>
   <header class="masthead text-white text-center" style="background:url('assets/img/bg-masthead.jpg')no-repeat center center;background-size:cover;">
@@ -65,6 +70,12 @@ And for everyone else, stay home, stay safe, use our site and go out only when a
     </div>
   </header>
   <input type="text" id="areas" value="<%=JSON.stringify(areas)%>" hidden>
+
+  <div class="row" style="margin: 40px;">
+    <a href="https://www.mohfw.gov.in/pdf/coronvavirushelplinenumber.pdf" target="_blank" class="text-center col-12">
+      <h5 style="text-transform:uppercase;">View helpline numbers by state</h5>
+    </a>
+  </div>
 
   <div class="row" style="margin-top: 30px;">
     <div class="col-1"></div>
