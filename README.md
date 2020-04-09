@@ -31,4 +31,4 @@ To make it easier for people to stay at home, we are also developing a system to
   
   > Note: The prototype for the ordering system is on the test branch
   
-  !([process flow](https://raw.githubusercontent.com/vaibhavmuchandi/coronahelp/master/CoronaHelp.png))
+[alt text](https://github.com/vaibhavmuchandi/coronahelp/blob/master/CoronaHelp.png)
