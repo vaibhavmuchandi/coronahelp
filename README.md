@@ -30,3 +30,5 @@ To make it easier for people to stay at home, we are also developing a system to
   *	Billing and payment must be handled by the store itself. 
   
   > Note: The prototype for the ordering system is on the test branch
+  
+  ![alt text](https://drive.google.com/file/d/15gog9bXBYVBa2TeLK5sMBnLbqpRpEUDK/view?usp=sharing)
