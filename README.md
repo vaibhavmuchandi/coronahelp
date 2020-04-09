@@ -30,5 +30,6 @@ To make it easier for people to stay at home, we are also developing a system to
   *	Billing and payment must be handled by the store itself. 
   
   > Note: The prototype for the ordering system is on the test branch
-  
+ 
+### Data Flow Diagram
 <img src="CoronaHelp.png" alt="Process Flow"/>
