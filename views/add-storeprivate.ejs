@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <title>Add Store</title>
+  <link rel="stylesheet" href="assets/bootstrap/css/styles.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic">
+  <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+  <!--   <script src="../../node_modules/google-address-autocomplete/dist/google-address-autocomplete.min.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMtQOCpkOkgSeVgBwwtPrUh5A9QW32iqc&libraries=places"></script>-->
+</head>
+
+<body>
+  <nav class="navbar navbar-light navbar-expand bg-light navigation-clean">
+    <div class="container"><a class="navbar-brand" href="/">CoronaHelp</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1">
+      </button>
+      <a class="btn btn-primary ml-auto" role="button" href="/add-store">Add your store!</a>
+    </div>
+  </nav>
+
+  <header class="masthead text-black text-center" style="background:url('assets/img/bg-masthead.jpg')no-repeat center center;background-size:cover;">
+    <div class="row">
+      <div class="col-sm-4 col-md-3 col-lg-4 mx-auto">
+        <div class="card card-signin my-4">
+          <div class="card-body">
+            <h5 class="card-title text-center">Enter your store details</h5>
+            <form action="/add-store" method="POST" class="form-signin">
+              <div class="form-label-group">
+                <input type="text" id="autocomplete" class="form-control" placeholder="Locality" name="autocomplete" value="<%=details.locality%>" required autofocus>
+                <label for="autocomplete">Locality</label>
+              </div>
+              <input type="text" id="resultid" name="resultid" value="<%=details.placeid%>" hidden>
+              <div class="form-label-group">
+                <input type="text" id="storeName" class="form-control" placeholder="storeName" name="storeName" value="<%=details.storeName%>" required autofocus>
+                <label for="storeName">Store Name</label>
+              </div>
+              <div class="form-row">
+                <div class="form-label-group col-7 col-md-8">
+                  <input type="tel" id="storeContact" class="form-control" placeholder="storeContact" name="storeContact" value="<%=details.storeContact%>" maxlength="10" required autofocus>
+                  <label for="storeContact">Store Contact</label>
+                </div>
+                <div class="form-group col-5 col-md-4">
+                  <button type="button" class="btn btn-primary" data-toggle="modal" onclick="sendOTP()">Send OTP</button>
+                </div>
+              </div>
+              <div class="form-label-group">
+                <input type="text" id="storeAddress" class="form-control" placeholder="storeAddress" name="storeAddress" value="<%=details.storeFullAddress%>" required autofocus>
+                <label for="storeAddress">Store Full Address</label>
+              </div>
+              <div class="form-row">
+                <div class="form-label-group col-5 col-md-6">
+                  <input type="time" id="storeOpenTime" class="form-control" placeholder="storeOpenTime" name="storeOpenTime" value="<%=details.storeOpenTime%>" autofocus>
+                  <label for="storeOpenTime">Store Open Time</label>
+                </div>
+                <div class="form-label-group col-5 col-md-6">
+                  <input type="time" id="storeCloseTime" class="form-control" placeholder="storeCloseTime" name="storeCloseTime" value="<%=details.storeCloseTime%>" autofocus>
+                  <label for="storeCloseTime">Store Close Time</label>
+                </div>
+              </div>
+              <div class="form-label-group">
+                <input type="text" id="storeLandmark" class="form-control" placeholder="storeLandmark" name="storeLandmark" value="<%=details.landmark%>" autofocus>
+                <label for="storeLandmark">Landmark</label>
+              </div>
+
+              <div id="itemSelling">
+                <div class="items" style="display: inline; margin-right: 7%;">
+                  <label for="itemSelling">Items available:</label>
+                </div><br>
+                <div class="items" style="display: inline; margin-right: 7%;">
+                  <input type="checkbox" class="form-check-input" id="itemGrocery" onclick='buildList("Groceries")'> Groceries
+                </div>
+                <div class="items" style="display: inline; margin-right: 7%;">
+                  <input type="checkbox" class="form-check-input" id="itemVegetables" onclick='buildList("Vegetables")'> Vegetables
+                </div> <br>
+                <div class="items" style="display: inline; margin-right: 7%;">
+                  <input type="checkbox" class="form-check-input" id="itemGrains" onclick='buildList("Grains and Pulses")'> Grains and Pulses
+                </div>
+                <div class="items" style="display: inline; margin-right: 7%;">
+                  <input type="checkbox" class="form-check-input" id="itemToiletries" onclick='buildList("Toiletries")'> Toiletries
+                </div>
+                <br>
+                <div class="items" style="display: inline; margin-right: 7%;">
+                  <input type="checkbox" class="form-check-input" id="itemMedicines" onclick='buildList("Medicines")'> Medicines
+                </div>
+                <div class="items" style="display: inline; margin-right: 7%;">
+                  <input type="checkbox" class="form-check-input" id="itemWater" onclick='buildList("Water Supplies")'> Water Supplies
+                </div><br>
+                <div class="items" style="display: inline; margin-right: 7%;">
+                  <input type="checkbox" class="form-check-input" id="itemPet" onclick='buildList("Pet Supplies")'> Pet Supplies
+                </div>
+                <div class="items" style="display: inline; margin-right: 7%;">
+                  <input type="checkbox" class="form-check-input" id="itemFruits" onclick='buildList("Fruits")'> Fruits
+                </div>
+                <div class="items" style="display: inline; margin-right: 7%;">
+                  <input type="checkbox" class="form-check-input" id="itemMilk" onclick='buildList("Milk")'> Milk
+                </div>
+              </div>
+              <div class="items" style="display: inline; margin-right: 7%;">
+                <br>
+                Do you provide home delivery?
+                <div style=""><input type="radio" name="radio" class="form-check-input" id="delivery" value="Yes"> Yes </div>
+                <div><input type="radio" name="radio" class="form-check-input" id="delivery" value="No"> No </div>
+              </div>
+              <div class="form-label-group">
+                <input type="text" id="storeAdditional" class="form-control" placeholder="storeAdditional" name="storeAdditional" value="<%=details.additional%>" autofocus>
+                <label for="storeAdditional">Any Additional Information</label>
+              </div>
+          </div>
+          <input type="text" id="items" name="items" hidden>
+          <% if(valid) { %>
+          <button class="btn btn-lg btn-primary btn-block text-uppercase" style="margin-top: 20px;">Submit</button>
+          <br>
+          <% } else {%>
+          <%if(alert==1) {%>
+          <p style="color: red;">Please verify your mobile number by OTP</p>
+          <%}%>
+          <button class="btn btn-lg btn-primary btn-block text-uppercase" style="margin-top: 20px;">Submit</button>
+          <%}%>
+          </form>
+        </div>
+      </div>
+    </div>
+    </div>
+  </header>
+
+  <footer class="footer bg-light">
+    <p class="text-muted small mb-4 mb-lg-0" style="text-align: center;">Made with ♥ by Vaibhav Muchandi and Varun Shiri</p>
+    <p class="text-muted small mb-4 mb-lg-0" style="text-align: center;">Launched on 27 March 2020</p>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 my-auto h-100 text-center text-lg-left">
+          <ul class="list-inline mb-2">
+            <li class="list-inline-item"><a href="https://www.mohfw.gov.in/pdf/coronvavirushelplinenumber.pdf">Helplines</a></li>
+            <li class="list-inline-item"><span>⋅</span></li>
+            <li class="list-inline-item"><a href="/">Home</a></li>
+            <li class="list-inline-item"><span>⋅</span></li>
+            <li class="list-inline-item"><a href="/add-store">Add your store</a></li>
+            <li class="list-inline-item"><span>⋅</span></li>
+            <li class="list-inline-item"><a href="/list-stores">Search stores</a></li>
+            <li class="list-inline-item"><span>⋅</span></li>
+            <li class="list-inline-item"><a href="https://wa.me/918105937586">Contact</a></li>
+          </ul>
+          <p class="text-muted small mb-4 mb-lg-0">© CoronaFight 2020. All Rights Reserved.</p>
+        </div>
+        <div class="col-lg-6 my-auto h-100 text-center text-lg-right">
+          <ul class="list-inline mb-0">
+            <li class="list-inline-item"><a href="https://www.facebook.com/vaibhavmuchandii"><i class="fa fa-facebook fa-2x fa-fw"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.twitter.com/vaibhavmuchandi"><i class="fa fa-twitter fa-2x fa-fw"></i></a></li>
+            <li class="list-inline-item"><a href="https://www.instagram.com/vaibhav.muchandi"><i class="fa fa-instagram fa-2x fa-fw"></i></a></li>
+            <li class="list-inline-item"><a href="https://wa.me/918105937586"><i class="fa fa-whatsapp fa-2x fa-fw"></i></a></li>
+          </ul>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <form action="/send-otp" method="post" hidden>
+    <input type="text" name="details" id="details">
+    <input type="text" id="phoneNumber" name="phoneNumber">
+    <button id="otp-button">submit</button>
+  </form>
+
+  <div class="modal hide fade" id="otpModal">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenterTitle">Verify OTP</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Please enter the OTP sent to your mobile number</p>
+          <form action="/verify-otp" method="post" class="form-signin">
+            <div class="form-row">
+              <div class="form-label-group col-md-8">
+                <input type="text" id="otp" class="form-control" placeholder="Enter 6-digit OTP" name="otp" required autofocus>
+              </div>
+              <%if(alert=="Incorrect OTP"){%>
+              <p class="alert alert-danger"><%=alert%></p>
+              <%}%>
+              <div class="col-md-4">
+                <button class="btn btn-primary">Verify</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMtQOCpkOkgSeVgBwwtPrUh5A9QW32iqc&libraries=places"></script>
+    <script src="assets/js/google-address-autocomplete.min.js"></script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+
+    <%if(valid==false) {%>
+              <script type="text/javascript">
+                $('#otpModal').modal('show');
+              </script>
+              <%}%>
+    <script>
+      function sendOTP() {
+        let details = {
+          locality: document.getElementById('autocomplete').value,
+          placeid: document.getElementById('resultid').value,
+          storeName: document.getElementById('storeName').value,
+          storeContact: document.getElementById('storeContact').value,
+          storeFullAddress: document.getElementById('storeAddress').value,
+          storeLandmark: document.getElementById('storeLandmark').value,
+        }
+        document.getElementById('details').value = JSON.stringify(details);
+        document.getElementById('phoneNumber').value = document.getElementById('storeContact').value
+        document.getElementById('otp-button').click();
+      }
+      var placeid = ""
+      var items = []
+
+      function set() {
+        document.getElementById('resultid').value = placeid;
+      }
+      const options = {
+        componentRestrictions: {
+          country: "in"
+        }
+      };
+      new AddressAutocomplete('#autocomplete', options, function(result, rawResponse) {
+        console.log(result);
+        //console.log(rawResponse.place_id);
+        placeid = rawResponse.place_id
+        set()
+      });
+
+      function buildList(item) {
+        items.push(item)
+        console.log(items)
+        document.getElementById('items').value = items
+      }
+    </script>
+</body>
+
+
+
+</html>
